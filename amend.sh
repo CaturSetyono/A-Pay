@@ -4,7 +4,10 @@
 # Usage: ./amend.sh "commit message"
 
 COMMIT_MSG="${1:-auto update}"
-BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+BRANCH=$(git branch --show-current 2>/dev/null)
+if [[ -z "$BRANCH" ]]; then
+    BRANCH="main"
+fi
 
 echo "🚀 Auto Git Push with Loop Date"
 echo "=========================================="
@@ -100,13 +103,20 @@ while IFS= read -r line; do
     echo " amending date → $COMMIT_DATE"
     git commit --amend --no-edit --date="$COMMIT_DATE" > /dev/null
 
-    # Increment date by 1 day, stop if we exceed end date
-    CURRENT_DATE=$(date -d "$CURRENT_DATE + 1 day" +%Y-%m-%d 2>/dev/null || date -j -v+1d -f %Y-%m-%d "$CURRENT_DATE" +%Y-%m-%d)
-    
-    # Check if we've reached the end date
-    if [[ "$CURRENT_DATE" > "$END_DATE" ]]; then
+    # Increment date by 1 day, but never go past the end date.
+    NEXT_DATE=$(date -d "$CURRENT_DATE + 1 day" +%Y-%m-%d 2>/dev/null)
+    if [[ -z "$NEXT_DATE" ]]; then
+        NEXT_DATE=$(date -j -v+1d -f %Y-%m-%d "$CURRENT_DATE" +%Y-%m-%d 2>/dev/null)
+    fi
+
+    if [[ -n "$NEXT_DATE" && "$NEXT_DATE" > "$END_DATE" ]]; then
         echo " ⚠️  reached end date ($END_DATE), stopping date increment"
         CURRENT_DATE="$END_DATE"
+    elif [[ -n "$NEXT_DATE" ]]; then
+        CURRENT_DATE="$NEXT_DATE"
+    else
+        echo " ❌ unable to increment date from $CURRENT_DATE"
+        exit 1
     fi
 
     COUNT=$((COUNT + 1))
@@ -117,7 +127,7 @@ done < <(git status --short)
 echo ""
 
 # Check if there are local commits to push
-LOCAL_AHEAD=$(git rev-list --count origin/"$BRANCH".."$BRANCH" 2>/dev/null || echo "0")
+LOCAL_AHEAD=$(git rev-list --count "origin/$BRANCH".."$BRANCH" 2>/dev/null || echo "0")
 
 if [ "$COUNT" -gt 0 ] || [ "$LOCAL_AHEAD" -gt 0 ]; then
     if [ "$LOCAL_AHEAD" -gt 0 ]; then
