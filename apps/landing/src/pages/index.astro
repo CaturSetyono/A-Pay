@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Home" activePath="/">
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-24 border-b border-neutral-200">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-12">
+      <div class="col-span-12 lg:col-span-9">
+        <div class="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-400 mb-8 flex items-center gap-3">
+          <span class="w-8 h-[1px] bg-neutral-200"></span>
+          Pharos Network Protocol
+        </div>
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tighter text-neutral-900 mb-10 leading-[0.9] uppercase">
+          Autonomous <br />
+          <span class="text-neutral-300">Agent Payments</span>
+        </h1>
+      </div>
+      <div class="col-span-12 lg:col-span-6 lg:col-start-1 mt-6">
+        <p class="text-xl sm:text-2xl text-neutral-500 font-medium leading-relaxed uppercase tracking-tight mb-12">
+          A modular payment and escrow skill for AI agents. Build trustless value exchange into autonomous workflows.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/docs" class="px-10 py-4 text-xs font-bold uppercase tracking-widest text-white bg-neutral-900 hover:bg-neutral-800 transition-colors">
+            Get Started
+          </a>
+          <a href="/playground" class="px-10 py-4 text-xs font-bold uppercase tracking-widest text-neutral-900 border border-neutral-200 hover:bg-neutral-50 transition-colors">
+            Try Playground
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem & Solution Asymmetrical Split -->
+  <section class="border-b border-neutral-200">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200">
+      <div class="col-span-12 lg:col-span-7 py-24 pr-0 lg:pr-24">
+        <h2 class="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-12">01 / The Challenge</h2>
+        <h3 class="text-4xl sm:text-5xl font-extrabold text-neutral-900 mb-10 uppercase tracking-tighter leading-tight">
+          Agents cannot <br/> exchange value safely.
+        </h3>
+        <div class="space-y-6 text-sm text-neutral-500 font-medium leading-relaxed uppercase tracking-wider max-w-xl">
+          <p>Autonomous agents are blocked from purchasing services from one another due to a lack of secure payment infrastructure.</p>
+          <p>Direct transfers lack completion guarantees. Every developer is currently rebuilding custom, fragmented payment pipes.</p>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-5 py-24 pl-0 lg:pl-12 bg-neutral-50/50">
+        <h2 class="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-12">02 / The Protocol</h2>
+        <h3 class="text-4xl sm:text-5xl font-extrabold text-neutral-900 mb-10 uppercase tracking-tighter leading-tight">
+          Unified <br/> AgentPay.
+        </h3>
+        <p class="text-sm text-neutral-500 font-medium leading-relaxed mb-10 uppercase tracking-wider">
+          A standard protocol for locking, releasing, and refunding value based on task validation.
+        </p>
+        <ul class="space-y-6">
+          {['Trustless Value Exchange', 'Expiration Protection', 'Developer SDK'].map((item) => (
+            <li class="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-600">
+              <span class="w-2 h-[1px] bg-neutral-900"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Irregular Blueprint Features Grid -->
+  <section class="border-b border-neutral-200">
+    <div class="max-w-7xl mx-auto grid grid-cols-12 divide-y divide-neutral-200">
+      <!-- Row 1: 5/7 split -->
+      <div class="col-span-12 grid grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200">
+        <div class="col-span-12 lg:col-span-5 p-12 space-y-8">
+          <div class="text-[10px] font-mono text-neutral-300">REF_ID: EXEC_PAY</div>
+          <h3 class="text-xl font-extrabold text-neutral-900 uppercase tracking-tight">Payment Execution</h3>
+          <p class="text-[11px] text-neutral-500 font-medium uppercase tracking-widest leading-relaxed">
+            Facilitate instant native and ERC20 token transfers between AI agents on Pharos.
+          </p>
+        </div>
+        <div class="col-span-12 lg:col-span-7 p-12 space-y-8 bg-neutral-50/30">
+          <div class="text-[10px] font-mono text-neutral-300">REF_ID: VERIF_ASYNC</div>
+          <h3 class="text-xl font-extrabold text-neutral-900 uppercase tracking-tight">Transaction Verification</h3>
+          <p class="text-[11px] text-neutral-500 font-medium uppercase tracking-widest leading-relaxed">
+            Verify receipts on-chain asynchronously, allowing agents to confirm payments instantly via clean cryptographic proof.
+          </p>
+        </div>
+      </div>
+      <!-- Row 2: 8/4 split -->
+      <div class="col-span-12 grid grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-neutral-200">
+        <div class="col-span-12 lg:col-span-8 p-12 space-y-8 bg-neutral-50/30">
+          <div class="text-[10px] font-mono text-neutral-300">REF_ID: ESCROW_SMART</div>
+          <h3 class="text-xl font-extrabold text-neutral-900 uppercase tracking-tight">Smart Escrow Layer</h3>
+          <p class="text-[11px] text-neutral-500 font-medium uppercase tracking-widest leading-relaxed">
+            Robust smart contracts that support granular lock, release, and cancellation rules with block-timestamp protected refunds.
+          </p>
+        </div>
+        <div class="col-span-12 lg:col-span-4 p-12 space-y-8">
+          <div class="text-[10px] font-mono text-neutral-300">REF_ID: SDK_CORE</div>
+          <h3 class="text-xl font-extrabold text-neutral-900 uppercase tracking-tight">Typed SDK</h3>
+          <p class="text-[11px] text-neutral-500 font-medium uppercase tracking-widest leading-relaxed">
+            TypeScript library built with clean, strictly typed interfaces.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation (Massive Typography) -->
+  <section class="py-32 border-b border-neutral-200">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-12 items-center">
+      <div class="col-span-12 lg:col-span-6 mb-16 lg:mb-0">
+        <h2 class="text-xs font-bold text-neutral-400 uppercase tracking-[0.3em] mb-6">Integration</h2>
+        <h3 class="text-6xl sm:text-7xl font-extrabold text-neutral-900 uppercase tracking-tighter leading-[0.9]">
+          Deploy <br/> in minutes.
+        </h3>
+      </div>
+      <div class="col-span-12 lg:col-span-6">
+        <div class="p-10 bg-neutral-900 text-white font-mono text-sm flex flex-col sm:flex-row items-center justify-between gap-8">
+          <div class="flex items-center gap-6 overflow-x-auto w-full sm:w-auto">
+            <span class="text-neutral-700 select-none">#</span>
+            <span class="font-bold">npm install @agentpay/pharos</span>
+          </div>
+          <button id="copy-install-btn" class="w-full sm:w-auto px-10 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-900 bg-white hover:bg-neutral-100 transition-colors shrink-0">
+            Copy
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example Usage (Editorial Layout) -->
+  <section class="py-32 border-b border-neutral-200 bg-neutral-50/30">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-12">
+      <div class="col-span-12 lg:col-span-4 lg:pr-12 mb-16 lg:mb-0">
+        <h2 class="text-xs font-bold text-neutral-400 uppercase tracking-[0.2em] mb-8">Implementation</h2>
+        <h3 class="text-4xl font-extrabold text-neutral-900 uppercase tracking-tighter mb-8 leading-tight">
+          Clean <br/> Protocols.
+        </h3>
+        <p class="text-sm text-neutral-500 font-medium uppercase tracking-wider leading-relaxed">
+          Initialize the SDK, define parameters, and lock funds. The complexity of gas management and ERC20 approvals is handled automatically.
+        </p>
+      </div>
+
+      <div class="col-span-12 lg:col-span-8 border border-neutral-200 bg-white shadow-sm">
+        <div class="flex items-center justify-between px-8 py-4 border-b border-neutral-100 bg-neutral-50/50">
+          <span class="text-[10px] text-neutral-400 font-bold uppercase tracking-widest">protocol_init.ts</span>
+        </div>
+        <div class="p-10 overflow-x-auto font-mono text-sm leading-relaxed text-neutral-800">
+          <pre><code><span class="text-neutral-400">import</span> &#123; AgentPay &#125; <span class="text-neutral-400">from</span> "@agentpay/pharos";
+<span class="text-neutral-400">import</span> &#123; ethers &#125; <span class="text-neutral-400">from</span> "ethers";
+
+<span class="text-neutral-900 font-bold">const</span> agentPay = <span class="text-neutral-900 font-bold">new</span> AgentPay(&#123;
+  contractAddress: "0x...",
+  signerOrProvider: wallet
+&#125;);
+
+<span class="text-neutral-900 font-bold">const</span> result = <span class="text-neutral-900 font-bold">await</span> agentPay.createEscrow(&#123;
+  receiver: "0x_worker_address",
+  amount: "1.5",
+  token: ethers.ZeroAddress,
+  lockDuration: 86400
+&#125;);</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA (Massive) -->
+  <section class="py-48">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-8xl sm:text-9xl font-extrabold text-neutral-900 mb-16 uppercase tracking-tighter leading-[0.8]">
+        Start <br/> Building.
+      </h2>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <a href="/playground" class="px-16 py-6 text-xs font-bold uppercase tracking-[0.2em] text-white bg-neutral-900 hover:bg-neutral-800 transition-colors">
+          Launch Playground
+        </a>
+        <a href="/docs" class="px-16 py-6 text-xs font-bold uppercase tracking-[0.2em] text-neutral-900 border border-neutral-200 hover:bg-neutral-50 transition-colors">
+          Documentation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const btn = document.getElementById('copy-install-btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText('npm install @agentpay/pharos');
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(() => {
+          btn.textContent = originalText;
+        }, 2000);
+      });
+    }
+  </script>
+</Layout>

@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Documentation" activePath="/docs">
+  <div class="max-w-7xl mx-auto px-6 py-24 border-b border-neutral-200 grid grid-cols-12 gap-0">
+    <!-- Sidebar Nav -->
+    <aside class="col-span-12 lg:col-span-3 lg:border-r lg:border-neutral-200 lg:pr-12 pb-12 lg:pb-0">
+      <div class="sticky top-32 space-y-10">
+        <div>
+          <h3 class="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] mb-6">Getting Started</h3>
+          <ul class="space-y-3 text-xs font-bold uppercase tracking-widest text-neutral-500">
+            <li><a href="#installation" class="hover:text-neutral-900 transition-colors">Installation</a></li>
+            <li><a href="#quickstart" class="hover:text-neutral-900 transition-colors">Quickstart</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] mb-6">SDK Reference</h3>
+          <ul class="space-y-3 text-xs font-bold uppercase tracking-widest text-neutral-500">
+            <li><a href="#constructor" class="hover:text-neutral-900 transition-colors">AgentPay Config</a></li>
+            <li><a href="#create-escrow" class="hover:text-neutral-900 transition-colors">createEscrow()</a></li>
+            <li><a href="#release-escrow" class="hover:text-neutral-900 transition-colors">releaseEscrow()</a></li>
+            <li><a href="#cancel-escrow" class="hover:text-neutral-900 transition-colors">cancelEscrow()</a></li>
+            <li><a href="#verify-transaction" class="hover:text-neutral-900 transition-colors">verifyTransaction()</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] mb-6">Protocol</h3>
+          <ul class="space-y-3 text-xs font-bold uppercase tracking-widest text-neutral-500">
+            <li><a href="#contract-architecture" class="hover:text-neutral-900 transition-colors">Smart Contract</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Docs Content -->
+    <article class="col-span-12 lg:col-span-9 lg:pl-16 prose prose-neutral max-w-none prose-headings:uppercase prose-headings:tracking-tighter prose-headings:font-extrabold prose-h1:text-6xl prose-h2:text-3xl prose-h2:border-b prose-h2:border-neutral-200 prose-h2:pb-4 prose-a:text-neutral-900 prose-code:text-neutral-900 prose-code:bg-neutral-100 prose-code:px-1 prose-code:rounded-none">
+      <h1 class="mb-4">Documentation</h1>
+      <p class="text-xl text-neutral-500 font-medium uppercase tracking-tight mb-16">The modular payment skill for Pharos AI Agents.</p>
+
+      <!-- Section: Installation -->
+      <section id="installation" class="mb-24 scroll-mt-32">
+        <h2>Installation</h2>
+        <p>Install the core package via npm to enable payment skills in your agent workflow.</p>
+        <div class="p-6 bg-neutral-50 border border-neutral-200 font-mono text-sm text-neutral-900 font-bold">
+          npm install @agentpay/pharos
+        </div>
+      </section>
+
+      <!-- Section: Quickstart -->
+      <section id="quickstart" class="mb-24 scroll-mt-32">
+        <h2>Quickstart</h2>
+        <p>Initialize the client and verify a transaction on-chain.</p>
+        <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
+          <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
+            <pre><code><span class="text-neutral-400">import</span> &#123; AgentPay &#125; <span class="text-neutral-400">from</span> "@agentpay/pharos";
+<span class="text-neutral-400">import</span> &#123; ethers &#125; <span class="text-neutral-400">from</span> "ethers";
+
+<span class="text-neutral-900 font-bold">const</span> provider = <span class="text-neutral-900 font-bold">new</span> ethers.JsonRpcProvider("https://rpc.pharos.network");
+<span class="text-neutral-900 font-bold">const</span> agentPay = <span class="text-neutral-900 font-bold">new</span> AgentPay(&#123;
+  contractAddress: "0x_escrow_contract_address",
+  signerOrProvider: provider
+&#125;);
+
+<span class="text-neutral-400">// Verify a payment transaction on-chain</span>
+<span class="text-neutral-900 font-bold">const</span> verification = <span class="text-neutral-900 font-bold">await</span> agentPay.verifyTransaction(&#123;
+  txHash: "0x_some_transaction_hash"
+&#125;);</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Config -->
+      <section id="constructor" class="mb-24 scroll-mt-32">
+        <h2>AgentPay Config</h2>
+        <table class="w-full text-left border-collapse border border-neutral-200 text-xs uppercase tracking-widest mb-8">
+          <thead>
+            <tr class="bg-neutral-50 border-b border-neutral-200 text-neutral-900 font-bold">
+              <th class="p-4">Parameter</th>
+              <th class="p-4">Type</th>
+              <th class="p-4">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-500 font-medium">
+            <tr class="border-b border-neutral-200">
+              <td class="p-4 font-mono text-neutral-900 font-bold">contractAddress</td>
+              <td class="p-4 font-mono">string</td>
+              <td class="p-4">Address of the AgentPayEscrow contract.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-mono text-neutral-900 font-bold">signerOrProvider</td>
+              <td class="p-4 font-mono">Signer | Provider</td>
+              <td class="p-4">Ethers signer or provider instance.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Section: createEscrow -->
+      <section id="create-escrow" class="mb-24 scroll-mt-32">
+        <h2>createEscrow(params)</h2>
+        <p>Locks funds in a secure escrow. Supports native tokens and ERC20 tokens.</p>
+        <table class="w-full text-left border-collapse border border-neutral-200 text-xs uppercase tracking-widest mb-8">
+          <thead>
+            <tr class="bg-neutral-50 border-b border-neutral-200 text-neutral-900 font-bold">
+              <th class="p-4">Field</th>
+              <th class="p-4">Type</th>
+              <th class="p-4">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-500 font-medium">
+            <tr class="border-b border-neutral-200">
+              <td class="p-4 font-mono text-neutral-900 font-bold">receiver</td>
+              <td class="p-4 font-mono">string</td>
+              <td class="p-4">Wallet address of the worker agent.</td>
+            </tr>
+            <tr class="border-b border-neutral-200">
+              <td class="p-4 font-mono text-neutral-900 font-bold">amount</td>
+              <td class="p-4 font-mono">string</td>
+              <td class="p-4">Decimal amount (e.g. "1.5").</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-mono text-neutral-900 font-bold">lockDuration</td>
+              <td class="p-4 font-mono">number</td>
+              <td class="p-4">Seconds before payer can cancel.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Section: Contract Architecture -->
+      <section id="contract-architecture" class="mb-24 scroll-mt-32">
+        <h2>Smart Contract Security</h2>
+        <p>
+          The underlying contract AgentPayEscrow.sol incorporates the checks-effects-interactions pattern and uses OpenZeppelin's ReentrancyGuard. All transfers use SafeERC20 wrapper libraries.
+        </p>
+      </section>
+    </article>
+  </div>
+</Layout>

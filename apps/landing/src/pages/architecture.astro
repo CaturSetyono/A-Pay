@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Architecture" activePath="/architecture">
+  <div class="max-w-5xl mx-auto px-6 py-24">
+    <div class="text-center mb-24">
+      <h1 class="text-6xl sm:text-7xl font-extrabold text-neutral-900 mb-6 uppercase tracking-tighter">Architecture</h1>
+      <p class="text-xl text-neutral-500 max-w-xl mx-auto font-medium uppercase tracking-tight">System-level integration of the AgentPay protocol.</p>
+    </div>
+
+    <!-- Main diagram -->
+    <div class="p-12 border border-neutral-200 bg-neutral-50 mb-24">
+      <h3 class="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] mb-12 text-center">Protocol Layer Interaction</h3>
+      
+      <div class="flex flex-col items-center">
+        <!-- Layer 1 -->
+        <div class="w-full max-w-md p-6 border border-neutral-900 bg-white text-center">
+          <div class="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-2">AI Agent Layer</div>
+          <div class="text-[10px] text-neutral-500 font-medium uppercase tracking-wider">Autonomous reasoning agents managing task execution.</div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="h-12 w-[1px] bg-neutral-900"></div>
+
+        <!-- Layer 2 -->
+        <div class="w-full max-w-md p-6 border border-neutral-900 bg-neutral-900 text-center">
+          <div class="text-xs font-bold text-white uppercase tracking-widest mb-2">AgentPay SDK</div>
+          <div class="text-[10px] text-neutral-400 font-medium uppercase tracking-wider">TypeScript client wrapper and automatic ERC20 approvals.</div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="h-12 w-[1px] bg-neutral-900"></div>
+
+        <!-- Layer 3 -->
+        <div class="w-full max-w-md p-6 border border-neutral-900 bg-white text-center">
+          <div class="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-2">AgentPayEscrow Contract</div>
+          <div class="text-[10px] text-neutral-500 font-medium uppercase tracking-wider">Secure value holding and state management.</div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="h-12 w-[1px] bg-neutral-900"></div>
+
+        <!-- Layer 4 -->
+        <div class="w-full max-w-md p-6 border border-neutral-200 bg-neutral-100 text-center">
+          <div class="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-2">Pharos Network</div>
+          <div class="text-[10px] text-neutral-400 font-medium uppercase tracking-wider">EVM-compatible high-speed transaction layer.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workflows -->
+    <div class="grid md:grid-cols-2 gap-16">
+      <!-- Workflow 1 -->
+      <div class="space-y-10">
+        <h3 class="text-xs font-bold text-neutral-900 uppercase tracking-[0.2em] pb-4 border-b border-neutral-200">Standard Execution</h3>
+        <div class="space-y-8">
+          <div class="flex gap-6">
+            <div class="h-6 w-6 bg-neutral-900 text-white flex items-center justify-center text-[10px] font-bold shrink-0">01</div>
+            <div>
+              <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-2">Escrow Created</h4>
+              <p class="text-[10px] text-neutral-500 font-medium uppercase tracking-wider leading-relaxed">Payer Agent defines amount and transfers tokens to the protocol contract.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <div class="h-6 w-6 bg-neutral-900 text-white flex items-center justify-center text-[10px] font-bold shrink-0">02</div>
+            <div>
+              <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-2">Verification</h4>
+              <p class="text-[10px] text-neutral-500 font-medium uppercase tracking-wider leading-relaxed">Receiver Agent confirms funds are locked on-chain before executing the service.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <div class="h-6 w-6 bg-neutral-900 text-white flex items-center justify-center text-[10px] font-bold shrink-0">03</div>
+            <div>
+              <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-2">Release</h4>
+              <p class="text-[10px] text-neutral-500 font-medium uppercase tracking-wider leading-relaxed">Upon validation, Payer Agent triggers fund release directly to the Receiver.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workflow 2 -->
+      <div class="space-y-10">
+        <h3 class="text-xs font-bold text-neutral-900 uppercase tracking-[0.2em] pb-4 border-b border-neutral-200">Timeout & Refund</h3>
+        <div class="space-y-8">
+          <div class="flex gap-6">
+            <div class="h-6 w-6 bg-neutral-200 text-neutral-400 flex items-center justify-center text-[10px] font-bold shrink-0">01</div>
+            <div>
+              <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-2">Lock Initiated</h4>
+              <p class="text-[10px] text-neutral-500 font-medium uppercase tracking-wider leading-relaxed">Payer locks funds with a strictly defined timeout duration.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <div class="h-6 w-6 bg-neutral-200 text-neutral-400 flex items-center justify-center text-[10px] font-bold shrink-0">02</div>
+            <div>
+              <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-2">Stalled Workflow</h4>
+              <p class="text-[10px] text-neutral-500 font-medium uppercase tracking-wider leading-relaxed">Receiver fails to deliver or the agent goes offline during execution.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <div class="h-6 w-6 bg-neutral-200 text-neutral-400 flex items-center justify-center text-[10px] font-bold shrink-0">03</div>
+            <div>
+              <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-widest mb-2">Cancellation</h4>
+              <p class="text-[10px] text-neutral-500 font-medium uppercase tracking-wider leading-relaxed">Once the timeout expires, Payer reclaims funds via the cancel method.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

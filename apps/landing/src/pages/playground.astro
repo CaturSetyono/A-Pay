@@ -1,0 +1,243 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Playground" activePath="/playground">
+  <div class="max-w-7xl mx-auto px-6 py-24">
+    <div class="text-center mb-24">
+      <h1 class="text-6xl sm:text-7xl font-extrabold text-neutral-900 mb-6 uppercase tracking-tighter">Playground</h1>
+      <p class="text-xl text-neutral-500 max-w-xl mx-auto font-medium uppercase tracking-tight">Simulate real agent escrow flows in a controlled environment.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-16">
+      <!-- Left 2 Cols: Escrow Simulator -->
+      <div class="lg:col-span-2 space-y-12">
+        <div class="p-10 border border-neutral-200 bg-white shadow-sm relative overflow-hidden">
+          <div class="flex items-center justify-between mb-10 pb-6 border-b border-neutral-100">
+            <h3 class="text-xs font-bold text-neutral-900 uppercase tracking-[0.2em]">Escrow Simulator</h3>
+            <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-neutral-900 text-white">Active Simulation</span>
+          </div>
+
+          <!-- Interactive Area -->
+          <div class="grid md:grid-cols-2 gap-12">
+            <!-- Simulator Form -->
+            <div class="space-y-6">
+              <h4 class="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em]">1. Initialize Agreement</h4>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">Payer Agent Address</label>
+                  <input type="text" readonly value="0x7A9D8dE6...E812" class="w-full px-4 py-3 text-xs bg-neutral-50 border border-neutral-200 text-neutral-500 font-mono focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">Receiver Agent Address</label>
+                  <input type="text" readonly value="0x3f5C8e4A...F293" class="w-full px-4 py-3 text-xs bg-neutral-50 border border-neutral-200 text-neutral-500 font-mono focus:outline-none" />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">Amount (ETH)</label>
+                    <input id="sim-amount" type="number" step="0.1" value="1.5" class="w-full px-4 py-3 text-xs bg-white border border-neutral-200 text-neutral-900 font-mono focus:border-neutral-900 focus:outline-none" />
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">Timeout (s)</label>
+                    <input id="sim-timeout" type="number" value="10" class="w-full px-4 py-3 text-xs bg-white border border-neutral-200 text-neutral-900 font-mono focus:border-neutral-900 focus:outline-none" />
+                  </div>
+                </div>
+              </div>
+              <button id="btn-create" class="w-full py-4 text-xs font-bold uppercase tracking-[0.2em] text-white bg-neutral-900 hover:bg-neutral-800 transition-colors">
+                Lock Escrow Funds
+              </button>
+            </div>
+
+            <!-- Visual State Container -->
+            <div class="flex flex-col justify-between p-8 border border-neutral-200 bg-neutral-50 min-h-[300px]">
+              <div>
+                <h4 class="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em] mb-6">On-Chain State</h4>
+                <div class="space-y-4">
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-neutral-400 font-bold uppercase tracking-widest">Status:</span>
+                    <span id="state-status" class="px-2 py-1 text-[9px] font-bold uppercase tracking-widest border border-neutral-200 bg-white text-neutral-400">None</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-neutral-400 font-bold uppercase tracking-widest">Locked:</span>
+                    <span id="state-amount" class="font-mono text-neutral-900 font-bold">0.0 ETH</span>
+                  </div>
+                  <div class="flex justify-between items-center text-xs">
+                    <span class="text-neutral-400 font-bold uppercase tracking-widest">Timer:</span>
+                    <span id="state-timer" class="font-mono text-neutral-400 font-bold">--s</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Controls -->
+              <div class="grid grid-cols-2 gap-4 pt-8 border-t border-neutral-200">
+                <button id="btn-release" disabled class="py-3 text-[10px] font-bold uppercase tracking-widest text-neutral-400 border border-neutral-200 bg-white hover:bg-neutral-900 hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none">
+                  Release
+                </button>
+                <button id="btn-cancel" disabled class="py-3 text-[10px] font-bold uppercase tracking-widest text-neutral-400 border border-neutral-200 bg-white hover:bg-neutral-900 hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulator Logs -->
+        <div class="p-8 border border-neutral-200 bg-neutral-50 shadow-sm">
+          <h4 class="text-[10px] font-bold text-neutral-900 uppercase tracking-[0.2em] mb-6">SDK Console & Event Logs</h4>
+          <div id="sim-logs" class="h-48 overflow-y-auto font-mono text-[11px] leading-relaxed text-neutral-500 bg-white p-6 border border-neutral-200 space-y-2">
+            <div><span class="text-neutral-300">[{new Date().toLocaleTimeString()}]</span> System initialized.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 1 Col: Transaction Verification -->
+      <div class="space-y-12">
+        <div class="p-10 border border-neutral-200 bg-white shadow-sm">
+          <h3 class="text-xs font-bold text-neutral-900 uppercase tracking-[0.2em] mb-10">Tx Verification</h3>
+          
+          <div class="space-y-6">
+            <div class="space-y-4">
+              <label class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Transaction Hash</label>
+              <input id="verify-tx-hash" type="text" placeholder="0x..." value="0x7f23a9d8de63ffcae2b1008acde4a2817d23a492" class="w-full px-4 py-3 text-xs bg-white border border-neutral-200 text-neutral-900 font-mono focus:border-neutral-900 focus:outline-none" />
+              <button id="btn-verify" class="w-full py-4 text-xs font-bold uppercase tracking-[0.2em] text-white bg-neutral-900 hover:bg-neutral-800 transition-colors">Verify Transaction</button>
+            </div>
+
+            <!-- Verification results box -->
+            <div id="verify-result" class="hidden p-6 bg-neutral-50 border border-neutral-200 space-y-4">
+              <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-neutral-900">
+                <div class="h-2 w-2 bg-neutral-900"></div>
+                <span>Confirmed</span>
+              </div>
+              <div class="space-y-2 font-mono text-[10px] text-neutral-500">
+                <div class="flex justify-between"><span>Block:</span> <span class="text-neutral-900 font-bold">14,821,394</span></div>
+                <div class="flex justify-between"><span>Status:</span> <span class="text-neutral-900 font-bold">Success</span></div>
+                <div class="flex justify-between"><span>Gas:</span> <span class="text-neutral-900 font-bold">45,192</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mock AgentPay SDK simulator logic
+    let escrowState = {
+      status: "None",
+      amount: "0.0",
+      lockDuration: 0,
+      releaseTimeout: 0,
+      escrowId: ""
+    };
+
+    let timerInterval = null;
+
+    const btnCreate = document.getElementById("btn-create");
+    const btnRelease = document.getElementById("btn-release");
+    const btnCancel = document.getElementById("btn-cancel");
+    const btnVerify = document.getElementById("btn-verify");
+
+    const inputAmount = document.getElementById("sim-amount");
+    const inputTimeout = document.getElementById("sim-timeout");
+    const inputTxHash = document.getElementById("verify-tx-hash");
+
+    const stateStatus = document.getElementById("state-status");
+    const stateAmount = document.getElementById("state-amount");
+    const stateTimer = document.getElementById("state-timer");
+    const simLogs = document.getElementById("sim-logs");
+    const verifyResult = document.getElementById("verify-result");
+
+    function log(sender, message, isSuccess = false) {
+      const el = document.createElement("div");
+      el.className = isSuccess ? "text-neutral-900 font-bold" : "text-neutral-500";
+      el.innerHTML = `<span class="text-neutral-300">[${new Date().toLocaleTimeString()}]</span> <strong>${sender}:</strong> ${message}`;
+      simLogs.appendChild(el);
+      simLogs.scrollTop = simLogs.scrollHeight;
+    }
+
+    function updateUI() {
+      stateStatus.textContent = escrowState.status.toUpperCase();
+      stateStatus.className = "px-2 py-1 text-[9px] font-bold uppercase tracking-widest border " +
+        (escrowState.status === "None" ? "border-neutral-200 bg-white text-neutral-400" :
+         "border-neutral-900 bg-neutral-900 text-white");
+
+      stateAmount.textContent = `${escrowState.amount} ETH`;
+
+      if (escrowState.status === "Locked") {
+        btnCreate.disabled = true;
+        btnRelease.disabled = false;
+        btnCancel.disabled = false;
+        const now = Date.now();
+        const secondsLeft = Math.max(0, Math.ceil((escrowState.releaseTimeout - now) / 1000));
+        stateTimer.textContent = `${secondsLeft}s`;
+        stateTimer.className = "font-mono " + (secondsLeft === 0 ? "text-neutral-900 font-bold" : "text-neutral-400 font-bold");
+      } else {
+        btnCreate.disabled = false;
+        btnRelease.disabled = true;
+        btnCancel.disabled = true;
+        stateTimer.textContent = "--s";
+        stateTimer.className = "font-mono text-neutral-300 font-bold";
+      }
+    }
+
+    if (btnCreate) {
+      btnCreate.addEventListener("click", () => {
+        const amt = inputAmount.value;
+        const dur = parseInt(inputTimeout.value) || 10;
+        const escId = "0x" + Math.random().toString(16).slice(2, 10);
+        
+        log("SDK", `createEscrow triggered (Amount: ${amt} ETH)`);
+        
+        setTimeout(() => {
+          log("PROTOCOL", `Escrow Created ID: ${escId}`, true);
+          escrowState = {
+            status: "Locked",
+            amount: amt,
+            lockDuration: dur,
+            releaseTimeout: Date.now() + dur * 1000,
+            escrowId: escId
+          };
+          updateUI();
+          if (timerInterval) clearInterval(timerInterval);
+          timerInterval = setInterval(() => {
+            if (escrowState.status !== "Locked") { clearInterval(timerInterval); return; }
+            updateUI();
+          }, 1000);
+        }, 800);
+      });
+    }
+
+    if (btnRelease) {
+      btnRelease.addEventListener("click", () => {
+        log("SDK", `releaseEscrow called for ID: ${escrowState.escrowId}`);
+        setTimeout(() => {
+          log("PROTOCOL", `Escrow Released. Value transferred.`, true);
+          escrowState.status = "Released";
+          updateUI();
+        }, 800);
+      });
+    }
+
+    if (btnCancel) {
+      btnCancel.addEventListener("click", () => {
+        log("SDK", `cancelEscrow requested...`);
+        setTimeout(() => {
+          log("PROTOCOL", `Escrow Cancelled. Value refunded.`, true);
+          escrowState.status = "Cancelled";
+          updateUI();
+        }, 800);
+      });
+    }
+
+    if (btnVerify) {
+      btnVerify.addEventListener("click", () => {
+        btnVerify.textContent = "VERIFYING...";
+        verifyResult.classList.add("hidden");
+        setTimeout(() => {
+          btnVerify.textContent = "VERIFY TRANSACTION";
+          verifyResult.classList.remove("hidden");
+        }, 1200);
+      });
+    }
+  </script>
+</Layout>
