@@ -1,0 +1,16 @@
+{
+  "name": "example-marketplace-agent",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "@agentpay/pharos": "workspace:*",
+    "ethers": "^6.11.1"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
