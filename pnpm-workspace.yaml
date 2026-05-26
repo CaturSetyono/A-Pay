@@ -1,0 +1,12 @@
+packages:
+  - 'packages/*'
+  - 'apps/*'
+  - 'examples/*'
+  - 'contracts/*'
+
+allowBuilds:
+  keccak: true
+  secp256k1: true
+  esbuild: true
+  sharp: true
+  push-wuzz: set this to true or false
