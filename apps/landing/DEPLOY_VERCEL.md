@@ -1,6 +1,6 @@
 # Deploy ke Vercel — Landing Page AgentPay
 
-> Panduan ini sudah disesuaikan dengan **monorepo pnpm + Astro + TailwindCSS + workspace dependency (`@agentpay/pharos`)**.  
+> Panduan ini sudah disesuaikan dengan **monorepo pnpm + Astro + TailwindCSS + workspace dependency (`agentpay-pharos`)**.  
 > Ikuti langkah-langkah ini persis agar tidak gagal deploy.
 
 ---
@@ -23,7 +23,7 @@ Buka [vercel.com](https://vercel.com) → **Add New Project** → Import reposit
 |---|---|
 | **Root Directory** | `apps/landing` |
 | **Framework Preset** | Astro |
-| **Build Command** | `cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter @agentpay/pharos build && pnpm --filter landing build` |
+| **Build Command** | `cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter agentpay-pharos build && pnpm --filter landing build` |
 | **Output Directory** | `dist` |
 | **Install Command** | *(biarkan kosong / override via build command)* |
 | **Node Version** | `22.x` (atau `20.x` minimal) |
@@ -40,7 +40,7 @@ Buka [vercel.com](https://vercel.com) → **Add New Project** → Import reposit
 ## 3. Penjelasan Build Command
 
 ```bash
-cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter @agentpay/pharos build && pnpm --filter landing build
+cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter agentpay-pharos build && pnpm --filter landing build
 ```
 
 Apa yang terjadi:
@@ -49,11 +49,11 @@ Apa yang terjadi:
 |---|---|---|
 | 1 | `cd ../..` | Pindah ke root monorepo (dari `apps/landing` ke root) |
 | 2 | `pnpm install --frozen-lockfile --ignore-scripts` | Install semua dependencies berdasarkan `pnpm-lock.yaml`, skip lifecycle scripts |
-| 3 | `pnpm --filter @agentpay/pharos build` | Build SDK workspace dependency **sebelum** landing page |
+| 3 | `pnpm --filter agentpay-pharos build` | Build SDK workspace dependency **sebelum** landing page |
 | 4 | `pnpm --filter landing build` | Build landing page dengan Astro |
 
 > **Kenapa pakai perintah ini?**  
-> Karena `@agentpay/pharos` adalah workspace dependency (`"workspace:*"` di package.json).  
+> Karena `agentpay-pharos` adalah workspace dependency (`"workspace:*"` di package.json).  
 > Vercel tidak otomatis build workspace dependencies — harus manual.
 
 ---
@@ -65,7 +65,7 @@ Buat file `apps/landing/vercel.json`:
 ```json
 {
   "framework": "astro",
-  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter @agentpay/pharos build && pnpm --filter landing build",
+  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter agentpay-pharos build && pnpm --filter landing build",
   "outputDirectory": "dist",
   "installCommand": null,
   "nodeVersion": "22.x"
@@ -94,10 +94,10 @@ Dengan file ini, semua setting sudah terbaca otomatis — tidak perlu setting ma
 
 ---
 
-### ❌ `Cannot find module '@agentpay/pharos'`
+### ❌ `Cannot find module 'agentpay-pharos'`
 
-**Sebab:** Workspace dependency `@agentpay/pharos` belum di-build.  
-**Solusi:** Pastikan build command menjalankan `pnpm --filter @agentpay/pharos build` **sebelum** `pnpm --filter landing build`.
+**Sebab:** Workspace dependency `agentpay-pharos` belum di-build.  
+**Solusi:** Pastikan build command menjalankan `pnpm --filter agentpay-pharos build` **sebelum** `pnpm --filter landing build`.
 
 ---
 
@@ -160,7 +160,7 @@ Jalankan ini dari **root monorepo** untuk mensimulasikan build Vercel:
 pnpm install
 
 # Step 2: Build SDK
-pnpm --filter @agentpay/pharos build
+pnpm --filter agentpay-pharos build
 
 # Step 3: Build landing
 pnpm --filter landing build
@@ -204,7 +204,7 @@ Simpan file ini di `apps/landing/vercel.json`:
 ```json
 {
   "framework": "astro",
-  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter @agentpay/pharos build && pnpm --filter landing build",
+  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter agentpay-pharos build && pnpm --filter landing build",
   "outputDirectory": "dist",
   "installCommand": null,
   "nodeVersion": "22.x",
@@ -235,7 +235,7 @@ Simpan file ini di `apps/landing/vercel.json`:
 Sebelum deploy, pastikan:
 
 - [ ] `pnpm install` sukses di lokal
-- [ ] `pnpm --filter @agentpay/pharos build` sukses
+- [ ] `pnpm --filter agentpay-pharos build` sukses
 - [ ] `pnpm --filter landing build` sukses
 - [ ] `pnpm-lock.yaml` sudah di-commit
 - [ ] `apps/landing/vercel.json` sudah ada
