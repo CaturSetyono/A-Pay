@@ -14,12 +14,12 @@ importers:
 
   apps/landing:
     dependencies:
-      '@agentpay/pharos':
-        specifier: workspace:*
-        version: link:../../packages/agentpay-sdk
       '@astrojs/tailwind':
         specifier: ^6.0.0
         version: 6.0.2(astro@6.4.6(@types/node@25.9.2)(jiti@1.21.7)(rollup@4.61.1)(yaml@2.9.0))(tailwindcss@3.4.19(yaml@2.9.0))(ts-node@10.9.2(@types/node@25.9.2)(typescript@5.9.3))
+      agentpay-pharos:
+        specifier: workspace:*
+        version: link:../../packages/agentpay-sdk
       astro:
         specifier: ^6.4.6
         version: 6.4.6(@types/node@25.9.2)(jiti@1.21.7)(rollup@4.61.1)(yaml@2.9.0)
@@ -55,7 +55,7 @@ importers:
 
   examples/marketplace-agent:
     dependencies:
-      '@agentpay/pharos':
+      agentpay-pharos:
         specifier: workspace:*
         version: link:../../packages/agentpay-sdk
       ethers:
@@ -71,7 +71,7 @@ importers:
 
   examples/research-agent:
     dependencies:
-      '@agentpay/pharos':
+      agentpay-pharos:
         specifier: workspace:*
         version: link:../../packages/agentpay-sdk
       ethers:
@@ -87,7 +87,7 @@ importers:
 
   examples/trading-agent:
     dependencies:
-      '@agentpay/pharos':
+      agentpay-pharos:
         specifier: workspace:*
         version: link:../../packages/agentpay-sdk
       ethers:
