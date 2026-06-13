@@ -6,7 +6,7 @@
     "start": "ts-node index.ts"
   },
   "dependencies": {
-    "@agentpay/pharos": "workspace:*",
+    "agentpay-pharos": "workspace:*",
     "ethers": "^6.11.1"
   },
   "devDependencies": {
