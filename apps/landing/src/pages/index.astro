@@ -118,7 +118,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="p-10 bg-neutral-900 text-white font-mono text-sm flex flex-col sm:flex-row items-center justify-between gap-8">
           <div class="flex items-center gap-6 overflow-x-auto w-full sm:w-auto">
             <span class="text-neutral-700 select-none">#</span>
-            <span class="font-bold">npm install @agentpay/pharos</span>
+            <span class="font-bold">npm install agentpay-pharos</span>
           </div>
           <button id="copy-install-btn" class="w-full sm:w-auto px-10 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-900 bg-white hover:bg-neutral-100 transition-colors shrink-0">
             Copy
@@ -146,7 +146,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="text-[10px] text-neutral-400 font-bold uppercase tracking-widest">protocol_init.ts</span>
         </div>
         <div class="p-10 overflow-x-auto font-mono text-sm leading-relaxed text-neutral-800">
-          <pre><code><span class="text-neutral-400">import</span> &#123; AgentPay &#125; <span class="text-neutral-400">from</span> "@agentpay/pharos";
+          <pre><code><span class="text-neutral-400">import</span> &#123; AgentPay &#125; <span class="text-neutral-400">from</span> "agentpay-pharos";
 <span class="text-neutral-400">import</span> &#123; ethers &#125; <span class="text-neutral-400">from</span> "ethers";
 
 <span class="text-neutral-900 font-bold">const</span> agentPay = <span class="text-neutral-900 font-bold">new</span> AgentPay(&#123;
@@ -186,7 +186,7 @@ import Layout from '../layouts/Layout.astro';
     const btn = document.getElementById('copy-install-btn');
     if (btn) {
       btn.addEventListener('click', () => {
-        navigator.clipboard.writeText('npm install @agentpay/pharos');
+        navigator.clipboard.writeText('npm install agentpay-pharos');
         const originalText = btn.textContent;
         btn.textContent = 'Copied';
         setTimeout(() => {
