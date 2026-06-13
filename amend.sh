@@ -4,10 +4,7 @@
 # Usage: ./amend.sh "commit message"
 
 COMMIT_MSG="${1:-auto update}"
-BRANCH=$(git branch --show-current 2>/dev/null)
-if [[ -z "$BRANCH" ]]; then
-    BRANCH="main"
-fi
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
 
 echo "🚀 Auto Git Push with Loop Date"
 echo "=========================================="
@@ -25,9 +22,7 @@ git status --short
 echo ""
 
 COUNT=0
-START_DATE="2026-05-15"
-END_DATE="2026-06-12"
-CURRENT_DATE="$START_DATE"
+CURRENT_DAY=1
 
 # ── Detect commit type from filename / path ──────────────────────────────────
 get_type() {
@@ -97,26 +92,17 @@ while IFS= read -r line; do
             ;;
     esac
 
-    # Format the commit date with time
-    COMMIT_DATE="$CURRENT_DATE 10:00:00"
+    # Format the day with leading zero if needed
+    FORMATTED_DAY=$(printf "%02d" $CURRENT_DAY)
+    COMMIT_DATE="2025-01-$FORMATTED_DAY 10:00:00"
     
     echo " amending date → $COMMIT_DATE"
     git commit --amend --no-edit --date="$COMMIT_DATE" > /dev/null
 
-    # Increment date by 1 day, but never go past the end date.
-    NEXT_DATE=$(date -d "$CURRENT_DATE + 1 day" +%Y-%m-%d 2>/dev/null)
-    if [[ -z "$NEXT_DATE" ]]; then
-        NEXT_DATE=$(date -j -v+1d -f %Y-%m-%d "$CURRENT_DATE" +%Y-%m-%d 2>/dev/null)
-    fi
-
-    if [[ -n "$NEXT_DATE" && "$NEXT_DATE" > "$END_DATE" ]]; then
-        echo " ⚠️  reached end date ($END_DATE), stopping date increment"
-        CURRENT_DATE="$END_DATE"
-    elif [[ -n "$NEXT_DATE" ]]; then
-        CURRENT_DATE="$NEXT_DATE"
-    else
-        echo " ❌ unable to increment date from $CURRENT_DATE"
-        exit 1
+    # Increment day and reset if it exceeds 13
+    CURRENT_DAY=$((CURRENT_DAY + 1))
+    if [ "$CURRENT_DAY" -gt 13 ]; then
+        CURRENT_DAY=1
     fi
 
     COUNT=$((COUNT + 1))
@@ -127,7 +113,7 @@ done < <(git status --short)
 echo ""
 
 # Check if there are local commits to push
-LOCAL_AHEAD=$(git rev-list --count "origin/$BRANCH".."$BRANCH" 2>/dev/null || echo "0")
+LOCAL_AHEAD=$(git rev-list --count origin/"$BRANCH".."$BRANCH" 2>/dev/null || echo "0")
 
 if [ "$COUNT" -gt 0 ] || [ "$LOCAL_AHEAD" -gt 0 ]; then
     if [ "$LOCAL_AHEAD" -gt 0 ]; then
