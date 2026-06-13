@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { AgentPay } from "@agentpay/pharos";
+import { AgentPay } from "agentpay-pharos";
 
 // This script simulates a Marketplace flow where the Worker Agent cannot complete the task
 // and voluntarily cancels the escrow to refund the Payer Agent.
