@@ -12,7 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@agentpay/pharos": "workspace:*",
+    "agentpay-pharos": "workspace:*",
     "@astrojs/tailwind": "^6.0.0",
     "astro": "^6.4.6",
     "ethers": "^6.11.1",
