@@ -2,6 +2,5 @@
   "framework": "astro",
   "buildCommand": "cd ../.. && pnpm install --frozen-lockfile --ignore-scripts && pnpm --filter agentpay-pharos build && pnpm --filter landing build",
   "outputDirectory": "dist",
-  "installCommand": null,
-  "nodeVersion": "22.x"
+  "installCommand": null
 }
