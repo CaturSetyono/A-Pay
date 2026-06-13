@@ -1,5 +1,5 @@
 {
-  "name": "@agentpay/pharos",
+  "name": "agentpay-pharos",
   "version": "1.0.0",
   "description": "Universal Payment & Escrow SDK for Autonomous AI Agents on Pharos",
   "main": "./dist/index.js",
