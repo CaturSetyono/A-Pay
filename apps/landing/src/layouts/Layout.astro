@@ -3,9 +3,10 @@ interface Props {
   title: string;
   description?: string;
   activePath?: string;
+  hideHeaderFooter?: boolean;
 }
 
-const { title, description = "Universal Payment & Escrow Skill for Autonomous AI Agents on Pharos", activePath = "/" } = Astro.props;
+const { title, description = "Universal Payment & Escrow Skill for Autonomous AI Agents on Pharos", activePath = "/", hideHeaderFooter = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,7 +23,7 @@ const { title, description = "Universal Payment & Escrow Skill for Autonomous AI
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-white text-neutral-900 font-sans antialiased selection:bg-neutral-900 selection:text-white min-h-screen flex flex-col relative">
+  <body class="bg-neutral-50/50 text-neutral-900 font-sans antialiased selection:bg-neutral-900 selection:text-white min-h-screen flex flex-col relative">
     <!-- Blueprint Grid Overlay -->
     <div class="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
       <div class="max-w-7xl mx-auto h-full px-6 grid grid-cols-12 gap-0">
@@ -32,84 +33,183 @@ const { title, description = "Universal Payment & Escrow Skill for Autonomous AI
       </div>
     </div>
     <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/95">
-      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div class="flex items-center gap-6">
-          <a href="/" class="flex items-center gap-2">
-            <div class="h-6 w-6 bg-neutral-900 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+    {!hideHeaderFooter && (
+      <header class="fixed top-0 left-0 right-0 z-50 w-full bg-transparent px-4 sm:px-6 pt-4 pointer-events-none">
+        <div class="max-w-7xl mx-auto bg-white/20 backdrop-blur-md border border-white/15 rounded-xl px-6 h-16 flex items-center justify-between shadow-sm pointer-events-auto">
+          <div class="flex items-center gap-6">
+            <!-- Pharos Logo (Clickable, links to Pharos website) -->
+            <a href="https://www.pharos.xyz/enhance" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <div class="h-8 w-8 bg-neutral-950 flex items-center justify-center rounded-lg shadow-inner">
+                <img src="/phaross.png" alt="Pharos Logo" class="h-5 w-5 object-contain" />
+              </div>
+            </a>
+            
+            <!-- Brand Name (links to home) -->
+            <a href="/" class="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
+              <span class="text-sm font-extrabold tracking-tight uppercase text-neutral-900">AgentPay</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-6 ml-6 border-l border-neutral-200 pl-6">
+              <a href="/" class={`text-[10px] font-bold uppercase tracking-widest transition-all hover:text-neutral-900 ${activePath === '/' ? 'text-neutral-900' : 'text-neutral-400'}`}>Home</a>
+              <a href="/docs" class={`text-[10px] font-bold uppercase tracking-widest transition-all hover:text-neutral-900 ${activePath === '/docs' ? 'text-neutral-900' : 'text-neutral-400'}`}>Docs</a>
+              <a href="/playground" class={`text-[10px] font-bold uppercase tracking-widest transition-all hover:text-neutral-900 ${activePath === '/playground' ? 'text-neutral-900' : 'text-neutral-400'}`}>Playground</a>
+              <a href="/architecture" class={`text-[10px] font-bold uppercase tracking-widest transition-all hover:text-neutral-900 ${activePath === '/architecture' ? 'text-neutral-900' : 'text-neutral-400'}`}>Architecture</a>
+            </nav>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <!-- Sparkly button "Try AgentPay", pointing to /playground -->
+            <a href="/playground" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-neutral-900 border border-neutral-200/80 bg-white hover:bg-neutral-50 transition-all rounded-lg shadow-sm hover:shadow-md relative overflow-hidden group">
+              <span class="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <!-- Sparkle Star SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 text-violet-500 animate-pulse">
+                <path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.84 2.858 2.857.84a.75.75 0 0 1 0 1.432l-2.857.84-.84 2.858a.75.75 0 0 1-1.432 0l-.84-2.858-2.857-.84a.75.75 0 0 1 0-1.432l2.857-.84.84-2.858A.75.75 0 0 1 9 4.5ZM18 14.25a.75.75 0 0 1 .721.544l.44 1.5.158.539.539.158 1.5.44a.75.75 0 0 1 0 1.432l-1.5.44-.539.158-.158.539-4.4 1.5a.75.75 0 0 1-1.432 0l-.44-1.5-.158-.539-.539-.158-1.5-.44a.75.75 0 0 1 0-1.432l1.5-.44.539-.158.158-.539.44-1.5A.75.75 0 0 1 18 14.25ZM16.5 6a.75.75 0 0 1 .721.544l.195.662.662.195a.75.75 0 0 1 0 1.432l-.662.195-.195.662a.75.75 0 0 1-1.432 0l-.195-.662-.662-.195a.75.75 0 0 1 0-1.432l.662-.195.195-.662A.75.75 0 0 1 16.5 6Z" clip-rule="evenodd" />
               </svg>
-            </div>
-            <span class="text-base font-bold tracking-tight uppercase">AgentPay</span>
-          </a>
+              <span class="relative z-10">Try AgentPay</span>
+            </a>
 
-          <nav class="hidden md:flex items-center gap-6">
-            <a href="/" class={`text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-100 ${activePath === '/' ? 'opacity-100 border-b-2 border-neutral-900 pb-1 pt-1' : 'opacity-40'}`}>Home</a>
-            <a href="/docs" class={`text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-100 ${activePath === '/docs' ? 'opacity-100 border-b-2 border-neutral-900 pb-1 pt-1' : 'opacity-40'}`}>Docs</a>
-            <a href="/playground" class={`text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-100 ${activePath === '/playground' ? 'opacity-100 border-b-2 border-neutral-900 pb-1 pt-1' : 'opacity-40'}`}>Playground</a>
-            <a href="/architecture" class={`text-xs font-semibold uppercase tracking-widest transition-opacity hover:opacity-100 ${activePath === '/architecture' ? 'opacity-100 border-b-2 border-neutral-900 pb-1 pt-1' : 'opacity-40'}`}>Architecture</a>
-          </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-neutral-500 hover:text-neutral-900 rounded-lg hover:bg-neutral-100 transition-colors" aria-label="Toggle menu">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <div class="flex items-center gap-4">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-neutral-900 hover:bg-neutral-800 transition-colors">
-            GitHub
+        <!-- Mobile navigation -->
+        <div id="mobile-menu" class="hidden md:hidden border border-neutral-200/80 bg-white/95 backdrop-blur-md rounded-2xl p-4 mt-2 space-y-2.5 shadow-lg mx-auto max-w-7xl pointer-events-auto">
+          <a href="/" class={`block px-3 py-2 text-xs font-bold uppercase tracking-widest rounded-lg ${activePath === '/' ? 'bg-neutral-900 text-white' : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900'}`}>Home</a>
+          <a href="/docs" class={`block px-3 py-2 text-xs font-bold uppercase tracking-widest rounded-lg ${activePath === '/docs' ? 'bg-neutral-900 text-white' : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900'}`}>Docs</a>
+          <a href="/playground" class={`block px-3 py-2 text-xs font-bold uppercase tracking-widest rounded-lg ${activePath === '/playground' ? 'bg-neutral-900 text-white' : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900'}`}>Playground</a>
+          <a href="/architecture" class={`block px-3 py-2 text-xs font-bold uppercase tracking-widest rounded-lg ${activePath === '/architecture' ? 'bg-neutral-900 text-white' : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900'}`}>Architecture</a>
+          <a href="https://github.com/CaturSetyono/A-Pay.git" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2.5 text-xs font-bold uppercase tracking-widest text-neutral-900 border border-neutral-200 rounded-xl bg-white hover:bg-neutral-50 transition-colors">
+            GitHub Repo
           </a>
-          <!-- Mobile Menu Button -->
-          <button id="mobile-menu-btn" class="md:hidden p-2 text-neutral-400 hover:text-neutral-900" aria-label="Toggle menu">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          </button>
         </div>
-      </div>
-
-      <!-- Mobile navigation -->
-      <div id="mobile-menu" class="hidden md:hidden border-b border-neutral-200 bg-white px-6 py-6 space-y-4">
-        <a href="/" class={`block text-xs font-bold uppercase tracking-widest ${activePath === '/' ? 'text-neutral-900' : 'text-neutral-400 hover:text-neutral-900'}`}>Home</a>
-        <a href="/docs" class={`block text-xs font-bold uppercase tracking-widest ${activePath === '/docs' ? 'text-neutral-900' : 'text-neutral-400 hover:text-neutral-900'}`}>Docs</a>
-        <a href="/playground" class={`block text-xs font-bold uppercase tracking-widest ${activePath === '/playground' ? 'text-neutral-900' : 'text-neutral-400 hover:text-neutral-900'}`}>Playground</a>
-        <a href="/architecture" class={`block text-xs font-bold uppercase tracking-widest ${activePath === '/architecture' ? 'text-neutral-900' : 'text-neutral-400 hover:text-neutral-900'}`}>Architecture</a>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 text-xs font-bold uppercase tracking-wider text-white bg-neutral-900">
-          GitHub
-        </a>
-      </div>
-    </header>
+      </header>
+    )}
 
     <main class="flex-grow">
       <slot />
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-neutral-200 bg-white py-16">
-      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 items-start gap-12">
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center gap-2">
-            <div class="h-5 w-5 bg-neutral-900 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3 h-3 text-white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-            </div>
-            <span class="text-xs font-bold uppercase tracking-tight">AgentPay</span>
+    <footer class="border-t border-neutral-900 bg-neutral-950 text-neutral-400 py-24 relative overflow-hidden">
+      <!-- Giant Watermark Background -->
+      <div class="absolute inset-x-0 bottom-12 flex justify-center pointer-events-none select-none opacity-[0.03] z-0">
+        <span class="font-podium text-[15vw] font-extrabold tracking-tighter uppercase text-white leading-none">AGENTPAY</span>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 relative z-10">
+        <!-- Columns Grid (Col 1-8) -->
+        <div class="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
+          <!-- Col 1: Protocol -->
+          <div class="space-y-4">
+            <h4 class="text-xs font-bold uppercase tracking-widest text-white">Protocol</h4>
+            <ul class="space-y-2.5 text-xs">
+              <li><a href="/docs#contract-architecture" class="hover:text-white transition-colors">Smart Escrow</a></li>
+              <li><a href="/docs#create-escrow" class="hover:text-white transition-colors">Payment Skills</a></li>
+              <li><a href="/docs#contract-architecture" class="hover:text-white transition-colors">Auto-Approval</a></li>
+              <li><a href="/docs#verify-transaction" class="hover:text-white transition-colors">Verification</a></li>
+              <li><a href="/architecture" class="hover:text-white transition-colors">Architecture Spec</a></li>
+            </ul>
           </div>
-          <p class="text-xs text-neutral-400 leading-relaxed max-w-xs uppercase tracking-wider">
-            Building the foundational payment protocol for the autonomous agent economy on Pharos Network.
-          </p>
-        </div>
-        
-        <div class="space-y-4">
-          <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400">Navigation</h4>
-          <div class="flex flex-col gap-2 text-xs font-semibold uppercase tracking-widest">
-            <a href="/docs" class="hover:underline">Documentation</a>
-            <a href="/playground" class="hover:underline">Playground</a>
-            <a href="/architecture" class="hover:underline">Architecture</a>
+
+          <!-- Col 2: SDK -->
+          <div class="space-y-4">
+            <h4 class="text-xs font-bold uppercase tracking-widest text-white">SDK</h4>
+            <ul class="space-y-2.5 text-xs">
+              <li><a href="/docs#installation" class="hover:text-white transition-colors">Installation</a></li>
+              <li><a href="/docs#constructor" class="hover:text-white transition-colors">Client Config</a></li>
+              <li><a href="/docs#create-escrow" class="hover:text-white transition-colors">Escrow Lifecycle</a></li>
+              <li><a href="https://github.com/CaturSetyono/A-Pay.git" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">TypeScript Core</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Examples -->
+          <div class="space-y-4">
+            <h4 class="text-xs font-bold uppercase tracking-widest text-white">Examples</h4>
+            <ul class="space-y-2.5 text-xs">
+              <li><a href="https://github.com/CaturSetyono/A-Pay.git" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Research Agent</a></li>
+              <li><a href="https://github.com/CaturSetyono/A-Pay.git" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Marketplace Agent</a></li>
+              <li><a href="https://github.com/CaturSetyono/A-Pay.git" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Trading Agent</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Resources -->
+          <div class="space-y-4">
+            <h4 class="text-xs font-bold uppercase tracking-widest text-white">Resources</h4>
+            <ul class="space-y-2.5 text-xs">
+              <li><a href="/docs" class="hover:text-white transition-colors">Documentation</a></li>
+              <li><a href="/playground" class="hover:text-white transition-colors">Launch Playground</a></li>
+              <li><a href="https://github.com/CaturSetyono/A-Pay.git" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub Repo</a></li>
+              <li><a href="https://www.pharos.xyz" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Pharos Network ↗</a></li>
+            </ul>
           </div>
         </div>
 
-        <div class="space-y-4 md:text-right">
-          <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400">Legal</h4>
-          <p class="text-[10px] text-neutral-400 uppercase tracking-widest">© 2026 AgentPay. Pharos Network. MIT License.</p>
+        <!-- Right Sidebar/CTA (Col 9-12) -->
+        <div class="md:col-span-4 flex flex-col md:items-end md:text-right gap-8">
+          <!-- Get Started & Description Group -->
+          <div class="space-y-4">
+            <div>
+              <a href="/docs" class="inline-block px-8 py-3 bg-white text-neutral-900 hover:bg-neutral-100 transition-all text-xs font-bold uppercase tracking-widest rounded-full shadow-sm hover:shadow-md">
+                Get Started
+              </a>
+            </div>
+            <p class="text-xs text-neutral-400 leading-relaxed max-w-sm md:ml-auto">
+              AgentPay is the native payment and escrow skill for autonomous AI agents, enabling seamless and trustless value transfer on Pharos Network.
+            </p>
+          </div>
+
+          <!-- Divider for Right Column on Mobile -->
+          <div class="w-12 h-[1px] bg-neutral-900 md:hidden"></div>
+
+          <!-- Socials & Pharos Brand Group -->
+          <div class="flex flex-col gap-5 items-start md:items-end w-full">
+            <!-- Social Badges (IG, LinkedIn, X) -->
+            <div class="flex items-center gap-3">
+              <!-- Instagram -->
+              <a href="https://www.instagram.com/tyodev.id/" target="_blank" rel="noopener noreferrer" class="h-8 w-8 rounded-full border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-700 transition-colors flex items-center justify-center text-white" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+              </a>
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/in/catursetyono/" target="_blank" rel="noopener noreferrer" class="h-8 w-8 rounded-full border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-700 transition-colors flex items-center justify-center text-white" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect width="4" height="12" x="2" y="9"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+              <!-- X -->
+              <a href="https://x.com/tyodev" target="_blank" rel="noopener noreferrer" class="h-8 w-8 rounded-full border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-700 transition-colors flex items-center justify-center text-white" aria-label="X">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="max-w-7xl mx-auto px-6 my-10 relative z-10">
+        <div class="h-[1px] bg-neutral-900"></div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row sm:justify-between items-center gap-4 text-[10px] text-neutral-500 uppercase tracking-widest relative z-10">
+        <div class="text-neutral-600 font-medium">© 2026 AgentPay. All rights reserved. Built natively on Pharos Network.</div>
+        <div class="flex gap-6">
+          <a href="/docs" class="hover:text-white transition-colors">Press & Media</a>
+          <span class="text-neutral-800">|</span>
+          <a href="/docs" class="hover:text-white transition-colors">Privacy Policy</a>
         </div>
       </div>
     </footer>
