@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { AgentPay } from "@agentpay/pharos";
+import { AgentPay } from "agentpay-pharos";
 
 // This script simulates a Trading Agent that verifies receipt of a transaction on-chain
 // using the verifyTransaction SDK function before executing a trade.
