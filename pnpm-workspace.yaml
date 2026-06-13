@@ -9,4 +9,4 @@ allowBuilds:
   secp256k1: true
   esbuild: true
   sharp: true
-  push-wuzz: set this to true or false
+  push-wuzz: true
