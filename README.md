@@ -48,7 +48,7 @@ pnpm --filter agentpay-contracts test
 
 Compile the TypeScript SDK files to ESM and CJS formats (emits to `dist/`):
 ```bash
-pnpm --filter @agentpay/pharos build
+pnpm --filter agentpay-pharos build
 ```
 
 ### 4. Run AI Agent Simulation Examples
@@ -65,9 +65,9 @@ The examples are designed to connect to a local Hardhat node.
    Run the deployment script or deploy manually, then export the contract address:
    ```bash
    # Windows PowerShell
-   $env:CONTRACT_ADDRESS="0x_contract_address_here"
+   $env:CONTRACT_ADDRESS="0x6EdcBd7A221CbA379Fe5eD54cad0A02B403a054D"
    # Linux/macOS
-   export CONTRACT_ADDRESS="0x_contract_address_here"
+   export CONTRACT_ADDRESS="0x6EdcBd7A221CbA379Fe5eD54cad0A02B403a054D"
    ```
 
 3. **Execute the simulations**:
@@ -91,11 +91,11 @@ Open [http://localhost:4321](http://localhost:4321) in your browser.
 ## SDK Usage Example
 
 ```typescript
-import { AgentPay } from "@agentpay/pharos";
+import { AgentPay } from "agentpay-pharos";
 import { ethers } from "ethers";
 
 const agentPay = new AgentPay({
-  contractAddress: "0x_contract_address",
+  contractAddress: "0x6EdcBd7A221CbA379Fe5eD54cad0A02B403a054D",
   signerOrProvider: walletSigner
 });
 
