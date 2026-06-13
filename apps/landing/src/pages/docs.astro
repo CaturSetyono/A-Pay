@@ -34,7 +34,7 @@ import Layout from '../layouts/Layout.astro';
     </aside>
 
     <!-- Main Docs Content -->
-    <article class="col-span-12 lg:col-span-9 lg:pl-16 prose prose-neutral max-w-none prose-headings:uppercase prose-headings:tracking-tighter prose-headings:font-extrabold prose-h1:text-6xl prose-h2:text-3xl prose-h2:border-b prose-h2:border-neutral-200 prose-h2:pb-4 prose-a:text-neutral-900 prose-code:text-neutral-900 prose-code:bg-neutral-100 prose-code:px-1 prose-code:rounded-none">
+    <article class="col-span-12 lg:col-span-9 lg:pl-16 prose prose-neutral max-w-none prose-headings:uppercase prose-headings:tracking-tighter prose-headings:font-extrabold prose-h1:text-6xl prose-h2:text-3xl prose-h2:border-b prose-h2:border-neutral-200 prose-h2:pb-4 prose-a:text-neutral-900 prose-code:text-neutral-900 prose-code:bg-transparent prose-code:px-1 prose-code:rounded-none">
       <h1 class="mb-4">Documentation</h1>
       <p class="text-xl text-neutral-500 font-medium uppercase tracking-tight mb-16">The modular payment skill for Pharos AI Agents.</p>
 
@@ -42,8 +42,21 @@ import Layout from '../layouts/Layout.astro';
       <section id="installation" class="mb-24 scroll-mt-32">
         <h2>Installation</h2>
         <p>Install the core package via npm to enable payment skills in your agent workflow.</p>
-        <div class="p-6 bg-neutral-50 border border-neutral-200 font-mono text-sm text-neutral-900 font-bold">
-          npm install agentpay-pharos
+        <div class="rounded-lg overflow-hidden border border-neutral-200 bg-[#0d1117] shadow-lg mb-8 max-w-xl">
+          <div class="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-[#21262d]">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
+            </div>
+            <span class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest font-mono">terminal</span>
+            <button class="copy-code-btn px-2.5 py-1 text-[10px] font-bold text-neutral-400 hover:text-white uppercase tracking-widest border border-neutral-800 bg-[#21262d] hover:bg-neutral-800 transition-all rounded">
+              Copy
+            </button>
+          </div>
+          <div class="p-6 font-mono text-sm text-neutral-300 bg-[#0d1117]">
+            <pre class="!bg-transparent !p-0 !m-0"><code class="!bg-transparent !text-[#abb2bf] !p-0 !border-none font-mono">npm install agentpay-pharos</code></pre>
+          </div>
         </div>
       </section>
 
@@ -51,20 +64,31 @@ import Layout from '../layouts/Layout.astro';
       <section id="quickstart" class="mb-24 scroll-mt-32">
         <h2>Quickstart</h2>
         <p>Initialize the client and verify a transaction on-chain.</p>
-        <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
-          <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
-            <pre><code><span class="text-neutral-400">import</span> &#123; AgentPay &#125; <span class="text-neutral-400">from</span> "agentpay-pharos";
-<span class="text-neutral-400">import</span> &#123; ethers &#125; <span class="text-neutral-400">from</span> "ethers";
+        <div class="rounded-lg overflow-hidden border border-neutral-200 bg-[#0d1117] shadow-lg mb-8">
+          <div class="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-[#21262d]">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
+            </div>
+            <span class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest font-mono">quickstart.ts</span>
+            <button class="copy-code-btn px-2.5 py-1 text-[10px] font-bold text-neutral-400 hover:text-white uppercase tracking-widest border border-neutral-800 bg-[#21262d] hover:bg-neutral-800 transition-all rounded">
+              Copy
+            </button>
+          </div>
+          <div class="p-6 overflow-x-auto font-mono text-xs text-neutral-300 leading-relaxed bg-[#0d1117]">
+            <pre class="!bg-transparent !p-0 !m-0"><code class="!bg-transparent !text-[#abb2bf] !p-0 !border-none"><span class="text-[#c678dd]">import</span> &#123; <span class="text-[#e5c07b]">AgentPay</span> &#125; <span class="text-[#c678dd]">from</span> <span class="text-[#98c379]">"agentpay-pharos"</span>;
+<span class="text-[#c678dd]">import</span> &#123; <span class="text-[#e5c07b]">ethers</span> &#125; <span class="text-[#c678dd]">from</span> <span class="text-[#98c379]">"ethers"</span>;
 
-<span class="text-neutral-900 font-bold">const</span> provider = <span class="text-neutral-900 font-bold">new</span> ethers.JsonRpcProvider("https://rpc.pharos.network");
-<span class="text-neutral-900 font-bold">const</span> agentPay = <span class="text-neutral-900 font-bold">new</span> AgentPay(&#123;
-  contractAddress: "0x6EdcBd7A221CbA379Fe5eD54cad0A02B403a054D",
-  signerOrProvider: provider
+<span class="text-[#c678dd]">const</span> <span class="text-[#61afef]">provider</span> = <span class="text-[#c678dd]">new</span> <span class="text-[#e5c07b]">ethers</span>.<span class="text-[#61afef]">JsonRpcProvider</span>(<span class="text-[#98c379]">"https://rpc.pharos.network"</span>);
+<span class="text-[#c678dd]">const</span> <span class="text-[#61afef]">agentPay</span> = <span class="text-[#c678dd]">new</span> <span class="text-[#e5c07b]">AgentPay</span>(&#123;
+  <span class="text-[#e06c75]">contractAddress</span>: <span class="text-[#98c379]">"0x6EdcBd7A221CbA379Fe5eD54cad0A02B403a054D"</span>,
+  <span class="text-[#e06c75]">signerOrProvider</span>: <span class="text-[#61afef]">provider</span>
 &#125;);
 
-<span class="text-neutral-400">// Verify a payment transaction on-chain</span>
-<span class="text-neutral-900 font-bold">const</span> verification = <span class="text-neutral-900 font-bold">await</span> agentPay.verifyTransaction(&#123;
-  txHash: "0x_some_transaction_hash"
+<span class="text-[#5c6370]">// Verify a payment transaction on-chain</span>
+<span class="text-[#c678dd]">const</span> <span class="text-[#61afef]">verification</span> = <span class="text-[#c678dd]">await</span> <span class="text-[#61afef]">agentPay</span>.<span class="text-[#56b6c2]">verifyTransaction</span>(&#123;
+  <span class="text-[#e06c75]">txHash</span>: <span class="text-[#98c379]">"0x_some_transaction_hash"</span>
 &#125;);</code></pre>
           </div>
         </div>
@@ -148,10 +172,21 @@ import Layout from '../layouts/Layout.astro';
             </tr>
           </tbody>
         </table>
-        <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
-          <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
-            <pre><code><span class="text-neutral-900 font-bold">const</span> release = <span class="text-neutral-900 font-bold">await</span> agentPay.releaseEscrow(&#123;
-  escrowId: "0x_some_escrow_id"
+        <div class="rounded-lg overflow-hidden border border-neutral-200 bg-[#0d1117] shadow-lg mb-8">
+          <div class="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-[#21262d]">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
+            </div>
+            <span class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest font-mono">release.ts</span>
+            <button class="copy-code-btn px-2.5 py-1 text-[10px] font-bold text-neutral-400 hover:text-white uppercase tracking-widest border border-neutral-800 bg-[#21262d] hover:bg-neutral-800 transition-all rounded">
+              Copy
+            </button>
+          </div>
+          <div class="p-6 overflow-x-auto font-mono text-xs text-neutral-300 leading-relaxed bg-[#0d1117]">
+            <pre class="!bg-transparent !p-0 !m-0"><code class="!bg-transparent !text-[#abb2bf] !p-0 !border-none"><span class="text-[#c678dd]">const</span> <span class="text-[#61afef]">release</span> = <span class="text-[#c678dd]">await</span> <span class="text-[#61afef]">agentPay</span>.<span class="text-[#56b6c2]">releaseEscrow</span>(&#123;
+  <span class="text-[#e06c75]">escrowId</span>: <span class="text-[#98c379]">"0x_some_escrow_id"</span>
 &#125;);</code></pre>
           </div>
         </div>
@@ -177,10 +212,21 @@ import Layout from '../layouts/Layout.astro';
             </tr>
           </tbody>
         </table>
-        <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
-          <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
-            <pre><code><span class="text-neutral-900 font-bold">const</span> cancel = <span class="text-neutral-900 font-bold">await</span> agentPay.cancelEscrow(&#123;
-  escrowId: "0x_some_escrow_id"
+        <div class="rounded-lg overflow-hidden border border-neutral-200 bg-[#0d1117] shadow-lg mb-8">
+          <div class="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-[#21262d]">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
+            </div>
+            <span class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest font-mono">cancel.ts</span>
+            <button class="copy-code-btn px-2.5 py-1 text-[10px] font-bold text-neutral-400 hover:text-white uppercase tracking-widest border border-neutral-800 bg-[#21262d] hover:bg-neutral-800 transition-all rounded">
+              Copy
+            </button>
+          </div>
+          <div class="p-6 overflow-x-auto font-mono text-xs text-neutral-300 leading-relaxed bg-[#0d1117]">
+            <pre class="!bg-transparent !p-0 !m-0"><code class="!bg-transparent !text-[#abb2bf] !p-0 !border-none"><span class="text-[#c678dd]">const</span> <span class="text-[#61afef]">cancel</span> = <span class="text-[#c678dd]">await</span> <span class="text-[#61afef]">agentPay</span>.<span class="text-[#56b6c2]">cancelEscrow</span>(&#123;
+  <span class="text-[#e06c75]">escrowId</span>: <span class="text-[#98c379]">"0x_some_escrow_id"</span>
 &#125;);</code></pre>
           </div>
         </div>
@@ -206,13 +252,24 @@ import Layout from '../layouts/Layout.astro';
             </tr>
           </tbody>
         </table>
-        <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
-          <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
-            <pre><code><span class="text-neutral-900 font-bold">const</span> status = <span class="text-neutral-900 font-bold">await</span> agentPay.verifyTransaction(&#123;
-  txHash: "0x_transaction_hash"
+        <div class="rounded-lg overflow-hidden border border-neutral-200 bg-[#0d1117] shadow-lg mb-8">
+          <div class="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-[#21262d]">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
+            </div>
+            <span class="text-[10px] font-bold text-neutral-500 uppercase tracking-widest font-mono">verify.ts</span>
+            <button class="copy-code-btn px-2.5 py-1 text-[10px] font-bold text-neutral-400 hover:text-white uppercase tracking-widest border border-neutral-800 bg-[#21262d] hover:bg-neutral-800 transition-all rounded">
+              Copy
+            </button>
+          </div>
+          <div class="p-6 overflow-x-auto font-mono text-xs text-neutral-300 leading-relaxed bg-[#0d1117]">
+            <pre class="!bg-transparent !p-0 !m-0"><code class="!bg-transparent !text-[#abb2bf] !p-0 !border-none"><span class="text-[#c678dd]">const</span> <span class="text-[#61afef]">status</span> = <span class="text-[#c678dd]">await</span> <span class="text-[#61afef]">agentPay</span>.<span class="text-[#56b6c2]">verifyTransaction</span>(&#123;
+  <span class="text-[#e06c75]">txHash</span>: <span class="text-[#98c379]">"0x_transaction_hash"</span>
 &#125;);
-<span class="text-neutral-900 font-bold">if</span> (status.confirmed) &#123;
-  console.log("Tx Confirmed in block: " + status.blockNumber);
+<span class="text-[#c678dd]">if</span> (<span class="text-[#61afef]">status</span>.<span class="text-[#e06c75]">confirmed</span>) &#123;
+  <span class="text-[#61afef]">console</span>.<span class="text-[#56b6c2]">log</span>(<span class="text-[#98c379]">"Tx Confirmed in block: "</span> + <span class="text-[#61afef]">status</span>.<span class="text-[#e06c75]">blockNumber</span>);
 &#125;</code></pre>
           </div>
         </div>
@@ -227,4 +284,38 @@ import Layout from '../layouts/Layout.astro';
       </section>
     </article>
   </div>
+
+  <script>
+    const copyButtons = document.querySelectorAll('.copy-code-btn');
+    copyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const container = button.closest('.rounded-lg');
+        const codeEl = container?.querySelector('code');
+        if (codeEl) {
+          const codeText = codeEl.textContent || '';
+          navigator.clipboard.writeText(codeText.trim());
+          const originalText = button.textContent;
+          button.textContent = 'COPIED';
+          setTimeout(() => {
+            button.textContent = originalText;
+          }, 2000);
+        }
+      });
+    });
+  </script>
+
+  <style is:global>
+    /* Remove default styling for prose code elements */
+    .prose code {
+      background-color: transparent !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      font-weight: inherit !important;
+      color: inherit !important;
+    }
+    .prose code::before,
+    .prose code::after {
+      content: "" !important;
+    }
+  </style>
 </Layout>
