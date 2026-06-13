@@ -254,19 +254,19 @@ Pharos
 Package Name
 
 ```bash
-@agentpay/pharos
+agentpay-pharos
 ```
 
 Install
 
 ```bash
-npm install @agentpay/pharos
+npm install agentpay-pharos
 ```
 
 Example
 
 ```typescript
-import { AgentPay } from "@agentpay/pharos";
+import { AgentPay } from "agentpay-pharos";
 ```
 
 ---
