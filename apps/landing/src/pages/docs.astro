@@ -43,7 +43,7 @@ import Layout from '../layouts/Layout.astro';
         <h2>Installation</h2>
         <p>Install the core package via npm to enable payment skills in your agent workflow.</p>
         <div class="p-6 bg-neutral-50 border border-neutral-200 font-mono text-sm text-neutral-900 font-bold">
-          npm install @agentpay/pharos
+          npm install agentpay-pharos
         </div>
       </section>
 
@@ -53,12 +53,12 @@ import Layout from '../layouts/Layout.astro';
         <p>Initialize the client and verify a transaction on-chain.</p>
         <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
           <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
-            <pre><code><span class="text-neutral-400">import</span> &#123; AgentPay &#125; <span class="text-neutral-400">from</span> "@agentpay/pharos";
+            <pre><code><span class="text-neutral-400">import</span> &#123; AgentPay &#125; <span class="text-neutral-400">from</span> "agentpay-pharos";
 <span class="text-neutral-400">import</span> &#123; ethers &#125; <span class="text-neutral-400">from</span> "ethers";
 
 <span class="text-neutral-900 font-bold">const</span> provider = <span class="text-neutral-900 font-bold">new</span> ethers.JsonRpcProvider("https://rpc.pharos.network");
 <span class="text-neutral-900 font-bold">const</span> agentPay = <span class="text-neutral-900 font-bold">new</span> AgentPay(&#123;
-  contractAddress: "0x_escrow_contract_address",
+  contractAddress: "0x6EdcBd7A221CbA379Fe5eD54cad0A02B403a054D",
   signerOrProvider: provider
 &#125;);
 
@@ -126,6 +126,96 @@ import Layout from '../layouts/Layout.astro';
             </tr>
           </tbody>
         </table>
+      </section>
+
+      <!-- Section: releaseEscrow -->
+      <section id="release-escrow" class="mb-24 scroll-mt-32">
+        <h2>releaseEscrow(params)</h2>
+        <p>Releases escrowed funds to the receiver. Can only be triggered by the escrow payer.</p>
+        <table class="w-full text-left border-collapse border border-neutral-200 text-xs uppercase tracking-widest mb-8">
+          <thead>
+            <tr class="bg-neutral-50 border-b border-neutral-200 text-neutral-900 font-bold">
+              <th class="p-4">Field</th>
+              <th class="p-4">Type</th>
+              <th class="p-4">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-500 font-medium">
+            <tr>
+              <td class="p-4 font-mono text-neutral-900 font-bold">escrowId</td>
+              <td class="p-4 font-mono">string</td>
+              <td class="p-4">The unique 32-byte identifier of the escrow agreement.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
+          <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
+            <pre><code><span class="text-neutral-900 font-bold">const</span> release = <span class="text-neutral-900 font-bold">await</span> agentPay.releaseEscrow(&#123;
+  escrowId: "0x_some_escrow_id"
+&#125;);</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: cancelEscrow -->
+      <section id="cancel-escrow" class="mb-24 scroll-mt-32">
+        <h2>cancelEscrow(params)</h2>
+        <p>Cancels an escrow agreement and refunds locked funds to the payer. The receiver can cancel at any time (voluntary refund). The payer can only cancel after the release timeout is reached.</p>
+        <table class="w-full text-left border-collapse border border-neutral-200 text-xs uppercase tracking-widest mb-8">
+          <thead>
+            <tr class="bg-neutral-50 border-b border-neutral-200 text-neutral-900 font-bold">
+              <th class="p-4">Field</th>
+              <th class="p-4">Type</th>
+              <th class="p-4">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-500 font-medium">
+            <tr>
+              <td class="p-4 font-mono text-neutral-900 font-bold">escrowId</td>
+              <td class="p-4 font-mono">string</td>
+              <td class="p-4">The unique 32-byte identifier of the escrow agreement.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
+          <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
+            <pre><code><span class="text-neutral-900 font-bold">const</span> cancel = <span class="text-neutral-900 font-bold">await</span> agentPay.cancelEscrow(&#123;
+  escrowId: "0x_some_escrow_id"
+&#125;);</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: verifyTransaction -->
+      <section id="verify-transaction" class="mb-24 scroll-mt-32">
+        <h2>verifyTransaction(params)</h2>
+        <p>Asynchronously checks the on-chain confirmation status of a given transaction hash.</p>
+        <table class="w-full text-left border-collapse border border-neutral-200 text-xs uppercase tracking-widest mb-8">
+          <thead>
+            <tr class="bg-neutral-50 border-b border-neutral-200 text-neutral-900 font-bold">
+              <th class="p-4">Field</th>
+              <th class="p-4">Type</th>
+              <th class="p-4">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-500 font-medium">
+            <tr>
+              <td class="p-4 font-mono text-neutral-900 font-bold">txHash</td>
+              <td class="p-4 font-mono">string</td>
+              <td class="p-4">The transaction hash to verify.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="border border-neutral-200 bg-white overflow-hidden mb-8 shadow-sm">
+          <div class="p-8 font-mono text-sm text-neutral-800 leading-relaxed">
+            <pre><code><span class="text-neutral-900 font-bold">const</span> status = <span class="text-neutral-900 font-bold">await</span> agentPay.verifyTransaction(&#123;
+  txHash: "0x_transaction_hash"
+&#125;);
+<span class="text-neutral-900 font-bold">if</span> (status.confirmed) &#123;
+  console.log("Tx Confirmed in block: " + status.blockNumber);
+&#125;</code></pre>
+          </div>
+        </div>
       </section>
 
       <!-- Section: Contract Architecture -->
