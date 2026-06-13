@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { AgentPay } from "@agentpay/pharos";
+import { AgentPay } from "agentpay-pharos";
 
 // This script simulates a Payer Agent hiring a Research Agent.
 // The Payer Agent locks funds in escrow, the Research Agent does the work, and the Payer Agent releases the escrow.
