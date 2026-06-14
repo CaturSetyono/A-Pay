@@ -94,7 +94,7 @@ AI Agents interact with the physical world by selecting "Tools" from their schem
 
 ## 💻 SDK Integration Example
 
-Import the skill client and instantiate it using a standard Web3 provider or signer (such as an agent's private key wallet):
+Import the skill client and instantiate it using a standard Web3 provider or signer (such as an agent's private key wallet):ga 
 
 ```typescript
 import { AgentPay } from "agentpay-pharos";
