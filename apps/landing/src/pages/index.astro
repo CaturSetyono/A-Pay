@@ -3,47 +3,214 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Home" activePath="/">
-  <!-- Hero Section -->
-  <section class="w-full bg-[#fafbfc] border-b border-neutral-200/85 relative overflow-hidden min-h-screen flex flex-col justify-center pt-28 pb-20">
-    <!-- Background Image Layer -->
-    <div class="absolute inset-0 bg-cover bg-center pointer-events-none opacity-90" style="background-image: url('/bg.png');"></div>
+  <!-- ── SCROLLING WRAPPER FOR PARALLAX ── -->
+  <div id="parallax-wrapper" class="relative w-full" style="height: 600vh;">
 
-    <!-- Fine blueprint grid pattern overlay -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-    
-    <!-- Central radial glowing spotlight -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-blue-500/5 via-violet-500/5 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-    
-    <!-- Structural vertical grid guides (delimiters) -->
-    <div class="absolute left-6 right-6 top-0 bottom-0 border-x border-neutral-200/30 pointer-events-none max-w-7xl mx-auto"></div>
+    <!-- ── FIXED/STICKY HERO ── -->
+    <section class="sticky top-0 hero-section w-full relative overflow-hidden h-screen flex flex-col z-0">
 
-    <div class="max-w-7xl mx-auto px-6 space-y-12 relative z-10 w-full">
+    <!-- ── bg.png FULL BLEED background ── -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/bg.png');"></div>
 
-    <!-- Centered Hero Copy -->
-    <div class="relative z-10 max-w-3xl mx-auto text-center space-y-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 border border-blue-100/60 rounded-md text-[10px] font-bold text-blue-600 uppercase tracking-wider">
-        <span class="px-1.5 py-0.5 text-[8px] bg-blue-500 text-white rounded font-extrabold uppercase leading-none">new</span>
-        <span>Pharos Network Protocol</span>
-      </div>
+    <!-- Fine tech grid subtle overlay -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.025] bg-[linear-gradient(to_right,#4fa3ff_1px,transparent_1px),linear-gradient(to_bottom,#4fa3ff_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 leading-[1.05] uppercase">
-        Autonomous <br />
-        <span class="bg-gradient-to-r from-neutral-950 via-neutral-600 to-neutral-400 bg-clip-text text-transparent">Agent Payments</span>
-      </h1>
-
-      <p class="text-base sm:text-lg text-neutral-500 font-medium leading-relaxed max-w-xl mx-auto">
-        A modular payment and escrow protocol for AI agents. Build trustless, automated value exchange directly into agentic workflows.
-      </p>
+    <!-- Watermark text behind agent -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[1]">
+      <span class="font-extrabold uppercase tracking-tighter leading-none text-black/10" style="font-size: clamp(80px, 16vw, 220px); letter-spacing: -0.04em;">AgentPay</span>
     </div>
-  </div>
-</section>
+
+
+
+    <!-- ── VERTICAL LEFT SIDEBAR ── -->
+    <div class="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-5">
+      <!-- Vertical line top -->
+      <div class="w-px h-16 bg-black/20"></div>
+      <!-- Social icons -->
+      <a href="https://www.instagram.com/tyodev.id/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://x.com/tyodev" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter" class="social-icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/catursetyono/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+        </svg>
+      </a>
+      <a href="https://github.com/CaturSetyono/A-Pay.git" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <!-- Vertical line bottom -->
+      <div class="w-px h-16 bg-black/20"></div>
+    </div>
+
+    <!-- ── MAIN HERO CONTENT ── -->
+    <!-- Uses absolute positioning like the reference: agent centered, text overlaid left -->
+    <div class="relative z-10 w-full min-h-screen flex flex-col">
+
+      <!-- Spacer for navbar -->
+      <div class="h-20 shrink-0"></div>
+
+      <!-- Content area: fills remaining height -->
+      <div class="flex-1 relative flex items-end pb-24">
+
+        <!-- AGENT CHARACTER — absolute center -->
+        <div class="absolute inset-0 flex items-end justify-center z-[2] pointer-events-none">
+
+          <!-- AGENT 3D SEQUENCE (14 FRAMES SEQUENTIAL) -->
+          <div id="agent-sequence-container" class="relative flex items-end justify-center will-change-transform" style="width: clamp(320px, 45vw, 600px); height: 100%; transition: transform 0.1s ease-out;">
+            {Array.from({ length: 14 }).map((_, i) => (
+              <img
+                src={`/agent-character/${i + 1}.svg`}
+                class={`agent-frame ${i === 0 ? 'relative z-[20]' : 'absolute inset-0'} w-full h-full object-contain object-bottom select-none transition-opacity duration-[150ms] ease-in-out`}
+                style={`opacity: ${i === 0 ? 1 : 0}; z-index: ${20 - i}; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));`}
+                draggable="false"
+              />
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    </section>
+
+    <!-- ── PARALLAX TEXT CONTENT (Scrolls over the sticky hero) ── -->
+    <!-- Content 1: Appears after scrolling 100vh -->
+    <div class="absolute w-full px-6 lg:px-24 pointer-events-none z-10" style="top: 120vh; perspective: 1000px;">
+      <div class="max-w-7xl mx-auto flex flex-col items-start">
+        <div class="parallax-card transform will-change-transform opacity-0">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="flex h-3 w-3 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+            </span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-900">01 / The Vision</span>
+          </div>
+          <h2 class="text-5xl sm:text-6xl md:text-8xl font-black text-neutral-900 tracking-tighter leading-[0.85] mb-8">
+            Autonomous<br/>
+            <span class="text-transparent relative" style="-webkit-text-stroke: 2px #34d399; filter: drop-shadow(0 0 15px rgba(52,211,153,0.6));">Value.</span>
+          </h2>
+          <div class="max-w-md border-l-2 border-emerald-400 pl-6 py-3 bg-white/40 backdrop-blur-sm rounded-r-xl border border-white/50 border-l-emerald-400 shadow-sm">
+            <p class="text-neutral-800 text-sm md:text-base font-bold leading-relaxed">
+              AgentPay enables AI agents to hold balances, escrow funds, and safely purchase services from one another without human intervention.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content 2: Appears after scrolling 200vh -->
+    <div class="absolute w-full px-6 lg:px-24 pointer-events-none z-10" style="top: 210vh; perspective: 1000px;">
+      <div class="max-w-7xl mx-auto flex flex-col items-end text-right">
+        <div class="parallax-card transform will-change-transform opacity-0">
+          <div class="inline-flex items-center justify-end gap-3 mb-6 w-full">
+            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-900">02 / Architecture</span>
+            <span class="flex h-3 w-3 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+            </span>
+          </div>
+          <h2 class="text-5xl sm:text-6xl md:text-8xl font-black text-neutral-900 tracking-tighter leading-[0.85] mb-8">
+            Built on<br/>
+            <span class="text-transparent relative" style="-webkit-text-stroke: 2px #34d399; filter: drop-shadow(0 0 15px rgba(52,211,153,0.6));">Pharos.</span>
+          </h2>
+          <div class="max-w-md border-r-2 border-emerald-400 pr-6 py-3 ml-auto bg-white/40 backdrop-blur-sm rounded-l-xl border border-white/50 border-r-emerald-400 shadow-sm">
+            <p class="text-neutral-800 text-sm md:text-base font-bold leading-relaxed">
+              Leveraging the speed and finality of Pharos, our smart escrows auto-approve ERC20 tokens and ensure ~0ms settlement globally.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content 3: Appears after scrolling 300vh -->
+    <div class="absolute w-full px-6 lg:px-24 pointer-events-none z-10" style="top: 300vh; perspective: 1000px;">
+      <div class="max-w-7xl mx-auto flex flex-col items-start">
+        <div class="parallax-card transform will-change-transform opacity-0">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="flex h-3 w-3 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+            </span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-900">03 / Integration</span>
+          </div>
+          <h2 class="text-5xl sm:text-6xl md:text-8xl font-black text-neutral-900 tracking-tighter leading-[0.85] mb-8">
+            Universal<br/>
+            <span class="text-transparent relative" style="-webkit-text-stroke: 2px #34d399; filter: drop-shadow(0 0 15px rgba(52,211,153,0.6));">SDK.</span>
+          </h2>
+          <div class="max-w-md border-l-2 border-emerald-400 pl-6 py-3 bg-white/40 backdrop-blur-sm rounded-r-xl border border-white/50 border-l-emerald-400 shadow-sm">
+            <p class="text-neutral-800 text-sm md:text-base font-bold leading-relaxed">
+              Integrated in minutes. Our drop-in TypeScript SDK abstracts complex escrow logic into single-line function calls for any AI workflow.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content 4: Appears after scrolling 390vh -->
+    <div class="absolute w-full px-6 lg:px-24 pointer-events-none z-10" style="top: 390vh; perspective: 1000px;">
+      <div class="max-w-7xl mx-auto flex flex-col items-end text-right">
+        <div class="parallax-card transform will-change-transform opacity-0">
+          <div class="inline-flex items-center justify-end gap-3 mb-6 w-full">
+            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-900">04 / Security</span>
+            <span class="flex h-3 w-3 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+            </span>
+          </div>
+          <h2 class="text-5xl sm:text-6xl md:text-8xl font-black text-neutral-900 tracking-tighter leading-[0.85] mb-8">
+            Trustless<br/>
+            <span class="text-transparent relative" style="-webkit-text-stroke: 2px #34d399; filter: drop-shadow(0 0 15px rgba(52,211,153,0.6));">Protocol.</span>
+          </h2>
+          <div class="max-w-md border-r-2 border-emerald-400 pr-6 py-3 ml-auto bg-white/40 backdrop-blur-sm rounded-l-xl border border-white/50 border-r-emerald-400 shadow-sm">
+            <p class="text-neutral-800 text-sm md:text-base font-bold leading-relaxed">
+              Funds are cryptographically locked on-chain. No intermediaries, no counterparty risk—just pure mathematical certainty for transactions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content 5: Appears after scrolling 480vh -->
+    <div class="absolute w-full px-6 lg:px-24 pointer-events-none z-10" style="top: 480vh; perspective: 1000px;">
+      <div class="max-w-7xl mx-auto flex flex-col items-start">
+        <div class="parallax-card transform will-change-transform opacity-0">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="flex h-3 w-3 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+            </span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-900">05 / Use Cases</span>
+          </div>
+          <h2 class="text-5xl sm:text-6xl md:text-8xl font-black text-neutral-900 tracking-tighter leading-[0.85] mb-8">
+            Beyond<br/>
+            <span class="text-transparent relative" style="-webkit-text-stroke: 2px #34d399; filter: drop-shadow(0 0 15px rgba(52,211,153,0.6));">Payments.</span>
+          </h2>
+          <div class="max-w-md border-l-2 border-emerald-400 pl-6 py-3 bg-white/40 backdrop-blur-sm rounded-r-xl border border-white/50 border-l-emerald-400 shadow-sm">
+            <p class="text-neutral-800 text-sm md:text-base font-bold leading-relaxed">
+              From automated supply chain settlements to decentralized AI swarms negotiating compute resources.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End 600vh wrapper -->
 
   <!-- Problem & Solution Section (Clean Split Layout) -->
-  <section class="border-b border-neutral-200 bg-neutral-50/30 py-24">
+  <section class="relative z-20 border-b border-neutral-200 bg-neutral-50 py-24 shadow-[0_-20px_50px_rgba(0,0,0,0.05)]">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
         <!-- Challenge Card (Left) -->
-        <div class="lg:col-span-6 bg-white border border-neutral-200 rounded-xl p-8 sm:p-12 flex flex-col justify-between hover:shadow-sm transition-all duration-300">
+        <div class="animasi-pemanis transform translate-y-12 opacity-0 transition-all duration-700 ease-out lg:col-span-6 bg-white border border-neutral-200 rounded-xl p-8 sm:p-12 flex flex-col justify-between hover:shadow-sm">
           <div class="space-y-6">
             <div class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-rose-500">
               <div class="h-2 w-2 rounded-full bg-rose-500"></div>
@@ -69,7 +236,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- Solution Card (Right) -->
-        <div class="lg:col-span-6 bg-neutral-950 border border-neutral-900 text-white rounded-xl p-8 sm:p-12 flex flex-col justify-between hover:shadow-lg transition-all duration-300 relative overflow-hidden">
+        <div class="animasi-pemanis transform translate-y-12 opacity-0 transition-all duration-700 ease-out delay-100 lg:col-span-6 bg-neutral-950 border border-neutral-900 text-white rounded-xl p-8 sm:p-12 flex flex-col justify-between hover:shadow-lg relative overflow-hidden">
           <div class="absolute inset-0 pointer-events-none opacity-[0.02] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:12px_12px]"></div>
           
           <div class="space-y-6 relative z-10">
@@ -106,14 +273,14 @@ import Layout from '../layouts/Layout.astro';
   <!-- Modern Features Section (Grid) -->
   <section class="py-24 border-b border-neutral-200 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16 space-y-4">
+      <div class="animasi-pemanis transform translate-y-8 opacity-0 transition-all duration-700 ease-out text-center mb-16 space-y-4">
         <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-neutral-400">Core Engine</h2>
         <h3 class="text-3xl sm:text-4xl font-extrabold text-neutral-900 uppercase tracking-tighter">Protocol Specifications</h3>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Specification 1 -->
-        <div class="p-8 border border-neutral-200 bg-white rounded-xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between h-64">
+        <div class="animasi-pemanis transform translate-y-12 opacity-0 transition-all duration-700 ease-out delay-0 p-8 border border-neutral-200 bg-white rounded-xl hover:-translate-y-1 hover:shadow-md flex flex-col justify-between h-64">
           <div class="space-y-4">
             <div class="text-[10px] font-mono text-neutral-400">[ REF_ID: EXEC_PAY ]</div>
             <h4 class="text-lg font-bold text-neutral-900 uppercase tracking-tight">Payment Execution</h4>
@@ -128,7 +295,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- Specification 2 -->
-        <div class="p-8 border border-neutral-200 bg-white rounded-xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between h-64">
+        <div class="animasi-pemanis transform translate-y-12 opacity-0 transition-all duration-700 ease-out delay-100 p-8 border border-neutral-200 bg-white rounded-xl hover:-translate-y-1 hover:shadow-md flex flex-col justify-between h-64">
           <div class="space-y-4">
             <div class="text-[10px] font-mono text-neutral-400">[ REF_ID: VERIF_ASYNC ]</div>
             <h4 class="text-lg font-bold text-neutral-900 uppercase tracking-tight">Async Verification</h4>
@@ -136,39 +303,39 @@ import Layout from '../layouts/Layout.astro';
               Verify transaction confirmations asynchronously. Agents query receipt proofs in a single SDK execution.
             </p>
           </div>
-          <!-- Refresh Icon -->
+          <!-- Check Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-neutral-400">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
         </div>
 
         <!-- Specification 3 -->
-        <div class="p-8 border border-neutral-200 bg-white rounded-xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between h-64">
+        <div class="animasi-pemanis transform translate-y-12 opacity-0 transition-all duration-700 ease-out delay-200 p-8 border border-neutral-200 bg-white rounded-xl hover:-translate-y-1 hover:shadow-md flex flex-col justify-between h-64">
           <div class="space-y-4">
-            <div class="text-[10px] font-mono text-neutral-400">[ REF_ID: ESCROW_SMART ]</div>
-            <h4 class="text-lg font-bold text-neutral-900 uppercase tracking-tight">Smart Escrow</h4>
+            <div class="text-[10px] font-mono text-neutral-400">[ REF_ID: SECURE_ESC ]</div>
+            <h4 class="text-lg font-bold text-neutral-900 uppercase tracking-tight">Secure Escrow</h4>
             <p class="text-xs text-neutral-500 leading-relaxed">
-              Granular locks and cancellation timeout protection built into OpenZeppelin secured smart contracts.
+              Immutable Solidity contracts safely hold balances in escrow until cryptographic execution conditions are met.
             </p>
           </div>
-          <!-- Shield Check Icon -->
+          <!-- Lock Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-neutral-400">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
           </svg>
         </div>
 
         <!-- Specification 4 -->
-        <div class="p-8 border border-neutral-200 bg-white rounded-xl hover:-translate-y-1 hover:shadow-md transition-all duration-300 flex flex-col justify-between h-64">
+        <div class="animasi-pemanis transform translate-y-12 opacity-0 transition-all duration-700 ease-out delay-300 p-8 border border-neutral-200 bg-white rounded-xl hover:-translate-y-1 hover:shadow-md flex flex-col justify-between h-64">
           <div class="space-y-4">
-            <div class="text-[10px] font-mono text-neutral-400">[ REF_ID: SDK_CORE ]</div>
-            <h4 class="text-lg font-bold text-neutral-900 uppercase tracking-tight">Type-Safe SDK</h4>
+            <div class="text-[10px] font-mono text-neutral-400">[ REF_ID: CANCEL_RT ]</div>
+            <h4 class="text-lg font-bold text-neutral-900 uppercase tracking-tight">Auto Cancellations</h4>
             <p class="text-xs text-neutral-500 leading-relaxed">
-              Modern TypeScript library exported in ESM, CJS, and DTS formats, designed for quick integration.
+              Integrated timeout protocols automatically refund the origin agent if a requested service drops or fails to fulfill.
             </p>
           </div>
-          <!-- Code Icon -->
+          <!-- Arrow U-Turn Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-neutral-400">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
           </svg>
         </div>
       </div>
@@ -276,16 +443,37 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Animation and 3D styles -->
-  <!-- Gentle float styles for dashboard cards -->
+  <!-- Hero Section + Gentle float styles -->
   <style>
+    /* ─── Gentle float (used elsewhere) ─── */
     @keyframes float-gentle {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
     }
-    .animate-float-gentle {
-      animation: float-gentle 6s ease-in-out infinite;
+    .animate-float-gentle { animation: float-gentle 6s ease-in-out infinite; }
+
+
+
+    /* ─── Agent image: static without glow ─── */
+    .agent-img {
+      width: auto;
+      height: clamp(480px, 88vh, 900px);
+      max-width: 100%;
+      object-fit: contain;
+      object-position: bottom center;
     }
+
+
+    /* ─── Social icon buttons ─── */
+    .social-icon-btn {
+      color: rgba(0,0,0,0.4);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .social-icon-btn:hover {
+      color: #ffffff;
+      transform: scale(1.15);
+    }
+
   </style>
 
   <!-- Client-Side Functionality (Matches docs.astro exactly) -->
@@ -318,6 +506,92 @@ import Layout from '../layouts/Layout.astro';
           }, 2000);
         }
       });
+    }
+  </script>
+
+  <!-- 3D Sequence Animation Script (Crossfade & Parallax Cards) -->
+  <script>
+    const wrapper = document.getElementById('parallax-wrapper');
+    const frames = document.querySelectorAll('.agent-frame');
+    const parallaxCards = document.querySelectorAll('.parallax-card');
+    const totalFrames = 14;
+    
+    if (wrapper && frames.length === totalFrames) {
+      window.addEventListener('scroll', () => {
+        const rect = wrapper.getBoundingClientRect();
+        const maxScroll = wrapper.scrollHeight - window.innerHeight;
+        
+        let scrollProgress = -rect.top / maxScroll;
+        scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+        
+        // 1. Agent Sequence Logic (Discrete sequential frames)
+        const rawIndex = scrollProgress * (totalFrames - 1);
+        const activeIndex = Math.round(rawIndex);
+        
+        frames.forEach((frame, idx) => {
+          const el = frame as HTMLElement;
+          el.style.opacity = idx === activeIndex ? '1' : '0';
+        });
+
+        // 2. Simple Scroll Reveal (Pemanis via Lenis)
+        const pemanisElements = document.querySelectorAll('.animasi-pemanis');
+        const windowHeight = window.innerHeight;
+        pemanisElements.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < windowHeight * 0.9) {
+            el.classList.add('translate-y-0', 'opacity-100');
+            el.classList.remove('translate-y-12', 'translate-y-8', 'opacity-0');
+          }
+        });
+
+
+
+        // 3. Cinematic Depth-of-Field Parallax Entrance Animation
+        const windowCenter = window.innerHeight / 2;
+        parallaxCards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.top + cardRect.height / 2;
+          
+          // Distance from the vertical center of the screen
+          const distFromCenter = cardCenter - windowCenter;
+          const maxDist = window.innerHeight * 0.8; // Extended range for cinematic feel
+          
+          let normalizedDist = distFromCenter / maxDist;
+          normalizedDist = Math.max(-1, Math.min(1, normalizedDist));
+          
+          // Opacity: non-linear fade for stronger presence at center
+          let cardOpacity = 1 - Math.abs(normalizedDist);
+          cardOpacity = Math.pow(cardOpacity, 1.5);
+          
+          // Transform Y: strong vertical parallax
+          const translateY = normalizedDist * 150; 
+          
+          // 3D Tilt: Elements tilt away as they move from center
+          const rotateX = normalizedDist * -20; 
+          
+          // Dynamic Blur: Creates "Camera Focus" effect (Depth of Field)
+          const blurAmount = Math.abs(normalizedDist) * 12; // up to 12px blur
+          
+          // Scale: cinematic push-in
+          const scale = 1 - (Math.abs(normalizedDist) * 0.15); 
+          
+          (card as HTMLElement).style.opacity = cardOpacity.toString();
+          (card as HTMLElement).style.filter = `blur(${blurAmount}px)`;
+          (card as HTMLElement).style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale}) rotateX(${rotateX}deg)`;
+        });
+
+      }, { passive: true });
+      
+      // Mouse movement parallax for the agent character container
+      const agentContainer = document.getElementById('agent-sequence-container');
+      if (agentContainer) {
+        document.addEventListener('mousemove', (e) => {
+          const x = (window.innerWidth / 2 - e.clientX) / 45; // Subtle X rotation
+          const y = (window.innerHeight / 2 - e.clientY) / 45; // Subtle Y rotation
+          // Apply 3D rotation based on mouse coordinates to make it feel alive
+          agentContainer.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${y}deg)`;
+        });
+      }
     }
   </script>
 </Layout>
