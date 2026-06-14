@@ -45,7 +45,7 @@ const isHome = activePath === "/";
     </div>
     <!-- Header Navigation -->
     {!hideHeaderFooter && (
-      <header id="main-header" class={`fixed top-0 left-0 right-0 z-50 w-full pointer-events-none transition-all duration-300 ${!isHome ? 'bg-neutral-950 border-b border-neutral-900' : ''}`}>
+      <header id="main-header" class={`fixed top-0 left-0 right-0 z-50 w-full py-3 pointer-events-none transition-all duration-300 ${!isHome ? 'bg-neutral-950 border-b border-neutral-900' : ''}`}>
         <div class="w-full px-8 lg:px-14 h-16 flex items-center justify-between pointer-events-auto">
           <!-- Left: Logo + Brand + Nav -->
           <div class="flex items-center gap-8">
@@ -70,7 +70,7 @@ const isHome = activePath === "/";
 
           <!-- Right: CTA + Mobile toggle -->
           <div class="flex items-center gap-4">
-            <a href="/playground" class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 text-xs font-black uppercase tracking-[0.15em] text-black bg-white hover:bg-neutral-200 transition-colors rounded-lg shadow-sm">
+            <a href="/playground" class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-white border border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/15 hover:border-white/50 transition-all rounded-full shadow-sm">
               Get Started
             </a>
             <!-- Mobile Menu Button -->
@@ -160,7 +160,7 @@ const isHome = activePath === "/";
           <!-- Get Started & Description Group -->
           <div class="space-y-4">
             <div>
-              <a href="/docs" class="inline-block px-8 py-3 bg-white text-neutral-900 hover:bg-neutral-100 transition-all text-xs font-bold uppercase tracking-widest rounded-full shadow-sm hover:shadow-md">
+              <a href="/docs" class="inline-flex items-center justify-center px-8 py-3.5 text-[11px] font-bold uppercase tracking-widest text-white border border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/15 hover:border-white/50 transition-all rounded-full shadow-sm">
                 Get Started
               </a>
             </div>
