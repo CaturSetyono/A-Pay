@@ -17,10 +17,8 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- Watermark text behind agent -->
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[1]">
-      <span class="font-extrabold uppercase tracking-tighter leading-none text-black/10" style="font-size: clamp(80px, 16vw, 220px); letter-spacing: -0.04em;">AgentPay</span>
+      <span class="font-extrabold uppercase tracking-tighter leading-none text-black/10" style="font-size: clamp(40px, 15vw, 220px); letter-spacing: -0.04em;">AgentPay</span>
     </div>
-
-
 
     <!-- ── VERTICAL LEFT SIDEBAR ── -->
     <div class="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-5">
@@ -59,17 +57,17 @@ import Layout from '../layouts/Layout.astro';
       <div class="h-20 shrink-0"></div>
 
       <!-- Content area: fills remaining height -->
-      <div class="flex-1 relative flex items-end pb-24">
+      <div class="flex-1 relative flex items-center sm:items-end pb-0 sm:pb-24">
 
         <!-- AGENT CHARACTER — absolute center -->
-        <div class="absolute inset-0 flex items-end justify-center z-[2] pointer-events-none">
+        <div class="absolute inset-0 flex items-center sm:items-end justify-center z-[2] pointer-events-none">
 
           <!-- AGENT 3D SEQUENCE (14 FRAMES SEQUENTIAL) -->
-          <div id="agent-sequence-container" class="relative flex items-end justify-center will-change-transform" style="width: clamp(320px, 45vw, 600px); height: 100%; transition: transform 0.1s ease-out;">
+          <div id="agent-sequence-container" class="relative flex items-center sm:items-end justify-center w-full sm:w-[90%] md:w-[60%] lg:w-[45%] max-w-[600px] will-change-transform" style="height: 100%; transition: transform 0.1s ease-out;">
             {Array.from({ length: 14 }).map((_, i) => (
               <img
                 src={`/agent-character/${i + 1}.svg`}
-                class={`agent-frame ${i === 0 ? 'relative z-[20]' : 'absolute inset-0'} w-full h-full object-contain object-bottom select-none transition-opacity duration-[150ms] ease-in-out`}
+                class={`agent-frame ${i === 0 ? 'relative z-[20]' : 'absolute inset-0'} w-full h-full object-contain object-center sm:object-bottom select-none transition-opacity duration-[150ms] ease-in-out scale-[1.3] sm:scale-100 origin-center sm:origin-bottom`}
                 style={`opacity: ${i === 0 ? 1 : 0}; z-index: ${20 - i}; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));`}
                 draggable="false"
               />
@@ -543,6 +541,8 @@ import Layout from '../layouts/Layout.astro';
 
         // 3. Cinematic Depth-of-Field Parallax Entrance Animation
         const windowCenter = window.innerHeight / 2;
+        let maxCardOpacity = 0;
+
         parallaxCards.forEach(card => {
           const cardRect = card.getBoundingClientRect();
           const cardCenter = cardRect.top + cardRect.height / 2;
@@ -557,6 +557,9 @@ import Layout from '../layouts/Layout.astro';
           // Opacity: non-linear fade for stronger presence at center
           let cardOpacity = 1 - Math.abs(normalizedDist);
           cardOpacity = Math.pow(cardOpacity, 1.5);
+          
+          // Track max opacity for the agent container effect
+          if (cardOpacity > maxCardOpacity) maxCardOpacity = cardOpacity;
           
           // Transform Y: strong vertical parallax
           const translateY = normalizedDist * 150; 
@@ -574,6 +577,28 @@ import Layout from '../layouts/Layout.astro';
           (card as HTMLElement).style.filter = `blur(${blurAmount}px)`;
           (card as HTMLElement).style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale}) rotateX(${rotateX}deg)`;
         });
+
+        // 4. Dynamic Agent Container Scaling (Shrink at start, grow at end)
+        const agentContainer = document.getElementById('agent-sequence-container');
+        if (agentContainer) {
+          let targetScale = 1;
+          
+          if (scrollProgress < 0.1) {
+            // Shrink smoothly from 1 to 0.75
+            const factor = scrollProgress / 0.1;
+            targetScale = 1 - (factor * 0.25);
+          } else if (scrollProgress > 0.9) {
+            // Grow smoothly from 0.75 to 1
+            const factor = (scrollProgress - 0.9) / 0.1;
+            targetScale = 0.75 + (factor * 0.25);
+          } else {
+            // Stay small in the middle while texts scroll by
+            targetScale = 0.75;
+          }
+          
+          // Apply scale (smooth CSS transition is already present)
+          agentContainer.style.transform = `scale(${targetScale})`;
+        }
 
       }, { passive: true });
     }
